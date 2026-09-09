@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+node_modules/
+scan_report.md
+scan_text/
+my-netplus-notes.md
+*-notes.md
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
