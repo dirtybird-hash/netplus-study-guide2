@@ -1,0 +1,1406 @@
+[
+{
+"d": 1,
+"s": "1.1",
+"q": "A user reports they can reach an internal file share but not any website by name. At which OSI layer does the most likely fault sit?",
+"a": [
+"Layer 7, the application layer",
+"Layer 1, the physical layer",
+"Layer 2, the data link layer",
+"Layer 4, the transport layer"
+],
+"c": 0,
+"e": "Reaching the file share proves Layers 1 through 4 are working. Name resolution is DNS, an application-layer protocol, so a top-down approach starting at Layer 7 finds this fastest."
+},
+{
+"d": 1,
+"s": "1.1",
+"q": "Which OSI layer is responsible for fragmenting packets so they fit a downstream network with a smaller frame size?",
+"a": [
+"Network",
+"Data link",
+"Transport",
+"Presentation"
+],
+"c": 0,
+"e": "Fragmentation and reassembly is a Layer 3 network layer function, alongside logical addressing and routing."
+},
+{
+"d": 1,
+"s": "1.1",
+"q": "A technician says the problem is 'at the switching layer.' Which layer do they mean?",
+"a": [
+"Layer 2",
+"Layer 3",
+"Layer 1",
+"Layer 5"
+],
+"c": 0,
+"e": "Switches forward on destination MAC address, which is the data link layer. Routing on IP is Layer 3."
+},
+{
+"d": 1,
+"s": "1.2",
+"q": "A switch receives a frame for a destination MAC address that is not in its MAC address table. What does it do?",
+"a": [
+"Floods the frame out all ports except the one it arrived on",
+"Drops the frame and sends an error to the source",
+"Forwards it to the default gateway",
+"Holds the frame until an ARP reply arrives"
+],
+"c": 0,
+"e": "Unknown unicast is flooded so the destination can be found. Once the switch learns that MAC, flooding stops for that address."
+},
+{
+"d": 1,
+"s": "1.2",
+"q": "Which statement correctly distinguishes an IDS from an IPS?",
+"a": [
+"An IDS sits out-of-band and alerts; an IPS sits in-line and can block",
+"An IDS sits in-line and blocks; an IPS sits out-of-band and alerts",
+"An IDS is host-based; an IPS is always network-based",
+"An IDS uses signatures; an IPS only uses anomaly detection"
+],
+"c": 0,
+"e": "Placement is the distinction. Because an IPS is in-line, a false positive stops legitimate traffic — which is why systems are usually run in detection mode first while they are tuned."
+},
+{
+"d": 1,
+"s": "1.2",
+"q": "An organisation needs block-level storage that appears to servers as a directly attached disk. What should be deployed?",
+"a": [
+"A SAN",
+"A NAS",
+"A CDN",
+"A load balancer"
+],
+"c": 0,
+"e": "A SAN presents block-level storage over a Fibre Channel fabric, so it looks like a local disk. A NAS is file-level over Ethernet using SMB or NFS."
+},
+{
+"d": 1,
+"s": "1.2",
+"q": "A stateful firewall permits a reply from a web server to the client's random source port 3355, but blocks an unsolicited inbound connection to that same port. Why?",
+"a": [
+"The permitted traffic belongs to a session the internal host initiated",
+"Port 3355 is a well-known port that is open by default",
+"The firewall filters only on destination IP address",
+"Outbound rules always take precedence over inbound rules"
+],
+"c": 0,
+"e": "A stateful firewall tracks connection state. Return traffic for an internally initiated session is allowed; an unsolicited inbound connection to the same port is not."
+},
+{
+"d": 1,
+"s": "1.2",
+"q": "Which traffic should QoS prioritise on a congested link?",
+"a": [
+"A VoIP call",
+"A payroll file transfer",
+"A nightly database backup",
+"An email with a large attachment"
+],
+"c": 0,
+"e": "QoS prioritises delay-intolerant traffic. The payroll file is business-critical but tolerates delay and reordering; a voice call does not."
+},
+{
+"d": 1,
+"s": "1.3",
+"q": "Under which cloud service model does the customer manage the operating system and applications while the provider manages virtualisation, servers and storage?",
+"a": [
+"IaaS",
+"PaaS",
+"SaaS",
+"FaaS"
+],
+"c": 0,
+"e": "IaaS gives you the infrastructure and leaves the OS upward to you. PaaS also abstracts the OS and runtime; SaaS leaves you only your data and settings."
+},
+{
+"d": 1,
+"s": "1.3",
+"q": "Which term describes the ability of cloud resources to both grow and shrink automatically as demand changes?",
+"a": [
+"Elasticity",
+"Scalability",
+"Multitenancy",
+"Redundancy"
+],
+"c": 0,
+"e": "Scalability is the ability to grow. Elasticity adds automatic contraction — capacity in April that shrinks again in May."
+},
+{
+"d": 1,
+"s": "1.3",
+"q": "A compromised virtual machine was destroyed automatically before the security team could examine it. Which cloud characteristic caused this problem?",
+"a": [
+"Elasticity",
+"Multitenancy",
+"Vendor lock-in",
+"Horizontal scaling"
+],
+"c": 0,
+"e": "Elastic environments tear down instances automatically, which conflicts with forensic evidence preservation. A physical machine would still be on the floor to investigate."
+},
+{
+"d": 1,
+"s": "1.4",
+"q": "Which protocol uses both TCP and UDP on the same port number?",
+"a": [
+"DNS on port 53",
+"HTTP on port 80",
+"SNMP on port 161",
+"RDP on port 3389"
+],
+"c": 0,
+"e": "DNS uses UDP for ordinary queries and TCP for zone transfers and oversized responses, both on port 53."
+},
+{
+"d": 1,
+"s": "1.4",
+"q": "A user needs their mail to stay synchronised across a phone and a laptop. Which protocol and port?",
+"a": [
+"IMAP on 143, or IMAPS on 993",
+"POP3 on 110, or POP3S on 995",
+"SMTP on 25",
+"LDAP on 389"
+],
+"c": 0,
+"e": "IMAP keeps mail on the server and synchronises state across devices. POP3 downloads and typically removes mail, so it suits only a single device."
+},
+{
+"d": 1,
+"s": "1.4",
+"q": "Which pair of protocols is most often confused, despite being unrelated?",
+"a": [
+"SFTP and FTPS",
+"HTTP and HTTPS",
+"IMAP and IMAPS",
+"LDAP and LDAPS"
+],
+"c": 0,
+"e": "SFTP is SSH File Transfer Protocol on port 22 — a different protocol entirely. FTPS is FTP wrapped in TLS on 989/990. The other pairs are genuinely the same protocol secured."
+},
+{
+"d": 1,
+"s": "1.4",
+"q": "In the DHCP DORA exchange, which message does the client broadcast first?",
+"a": [
+"Discover",
+"Offer",
+"Request",
+"Acknowledge"
+],
+"c": 0,
+"e": "Discover, Offer, Request, Acknowledge. Because Discover is a broadcast and broadcasts do not cross routers, a server on another subnet needs a relay agent or IP helper address."
+},
+{
+"d": 1,
+"s": "1.5",
+"q": "Two switches must be connected and neither supports auto-MDIX. Which cable is required?",
+"a": [
+"A crossover cable",
+"A straight-through cable",
+"A rollover cable",
+"A console cable"
+],
+"c": 0,
+"e": "Like devices need a crossover so senders align with receivers. Different device types — PC to switch, switch to router — use straight-through."
+},
+{
+"d": 1,
+"s": "1.5",
+"q": "Which multimode fibre category supports 40 Gbps up to 300 metres?",
+"a": [
+"OM3",
+"OM1",
+"OM2",
+"OM4"
+],
+"c": 0,
+"e": "OM3 is 40 Gbps to 300 m; OM4 is 40 Gbps to 550 m. OM1 and OM2 are 10 Gbps at 33 m and 82 m."
+},
+{
+"d": 1,
+"s": "1.5",
+"q": "Why must UPC and APC fibre connectors never be intermixed?",
+"a": [
+"They will not work correctly and the connectors can be physically destroyed",
+"APC carries data only in one direction",
+"UPC is single-mode only and APC is multimode only",
+"They use incompatible wavelengths"
+],
+"c": 0,
+"e": "The end faces are polished differently — APC at an 8 degree angle — so they do not mate. They are colour-coded specifically to prevent this."
+},
+{
+"d": 1,
+"s": "1.5",
+"q": "A run must carry 10 Gbps over the full 100 metres. Which cabling meets that?",
+"a": [
+"Cat 7",
+"Cat 5e",
+"Cat 6",
+"Cat 3"
+],
+"c": 0,
+"e": "Cat 6 carries 10 Gbps only to about 55 m. Cat 7 sustains 10 Gbps over the full 100 m."
+},
+{
+"d": 1,
+"s": "1.6",
+"q": "In a spine-leaf data centre fabric, why is Spanning Tree Protocol unnecessary between leaf and spine?",
+"a": [
+"Those links run at Layer 3, where loop prevention does not require blocking links",
+"Spine-leaf uses only a single link between each pair of switches",
+"STP is replaced by link aggregation on all fabric links",
+"Leaf switches operate in half duplex, which prevents loops"
+],
+"c": 0,
+"e": "Leaf-to-spine connectivity is Layer 3, so Layer 3 protocols handle loops and every link can be used simultaneously. That is the whole point of moving away from an all-Layer-2 design."
+},
+{
+"d": 1,
+"s": "1.6",
+"q": "Traffic flowing between two servers inside the same data centre is described as which of the following?",
+"a": [
+"East-west",
+"North-south",
+"Upstream",
+"Broadcast"
+],
+"c": 0,
+"e": "East-west is horizontal traffic within the data centre. North-south crosses layers, typically between the data centre and the outside world."
+},
+{
+"d": 1,
+"s": "1.7",
+"q": "A host is configured for DHCP and has the address 169.254.11.7. What does this indicate?",
+"a": [
+"The host could not reach a DHCP server and self-assigned an APIPA address",
+"The DHCP server assigned an address from a depleted secondary scope",
+"The host has a duplicate IP address conflict",
+"The default gateway is misconfigured"
+],
+"c": 0,
+"e": "169.254.0.0/16 is APIPA. The NIC and stack work, but no DHCP server answered — check the server, the scope, the VLAN, or a missing IP helper address."
+},
+{
+"d": 1,
+"s": "1.7",
+"q": "What is the network address for host 192.168.10.100/26?",
+"a": [
+"192.168.10.64",
+"192.168.10.0",
+"192.168.10.96",
+"192.168.10.128"
+],
+"c": 0,
+"e": "A /26 gives mask 255.255.255.192, so the magic number is 64. Blocks start at 0, 64, 128, 192; 100 falls in the 64 block. Broadcast is .127 and usable range is .65 to .126."
+},
+{
+"d": 1,
+"s": "1.7",
+"q": "Which subnet mask is most efficient for a point-to-point WAN link between two routers?",
+"a": [
+"/30",
+"/29",
+"/31",
+"/24"
+],
+"c": 0,
+"e": "A /30 gives exactly two usable addresses, one per router interface, wasting nothing."
+},
+{
+"d": 1,
+"s": "1.7",
+"q": "When designing a VLSM scheme, in what order should subnets be allocated?",
+"a": [
+"Largest requirement first",
+"Smallest requirement first",
+"In the order departments are listed",
+"Alphabetically by department name"
+],
+"c": 0,
+"e": "Largest first. Allocating smallest first fragments the address space and you run out before the large subnets are placed."
+},
+{
+"d": 1,
+"s": "1.7",
+"q": "Which feature of IPv4 does IPv6 eliminate entirely?",
+"a": [
+"Broadcast",
+"Multicast",
+"Unicast",
+"Anycast"
+],
+"c": 0,
+"e": "IPv6 has no broadcast at all. Multicast takes over those functions, and anycast is also supported."
+},
+{
+"d": 1,
+"s": "1.7",
+"q": "How many times may the '::' abbreviation appear in a single IPv6 address?",
+"a": [
+"Once",
+"Twice",
+"Once per hextet",
+"As many times as needed"
+],
+"c": 0,
+"e": "Only once. A second occurrence would make the number of collapsed zero groups ambiguous."
+},
+{
+"d": 1,
+"s": "1.8",
+"q": "In software-defined networking, which function is separated from the physical device and centralised?",
+"a": [
+"The control plane",
+"The data plane",
+"The forwarding plane",
+"The physical layer"
+],
+"c": 0,
+"e": "SDN separates the control plane — the decision-making — into centralised software. The device keeps the data plane and still forwards traffic."
+},
+{
+"d": 1,
+"s": "1.8",
+"q": "An organisation has exhausted the available VLAN IDs in a large multi-tenant environment. Which technology addresses this?",
+"a": [
+"VXLAN",
+"VTP",
+"802.1Q",
+"STP"
+],
+"c": 0,
+"e": "802.1Q caps VLANs at 4,096. VXLAN tunnels Layer 2 frames inside Layer 3 UDP, raising the ceiling to roughly 16 million segments that can also span sites."
+},
+{
+"d": 1,
+"s": "1.8",
+"q": "Which architecture combines SD-WAN with cloud-delivered security functions at the network edge?",
+"a": [
+"SASE",
+"VXLAN",
+"IaC",
+"NFV"
+],
+"c": 0,
+"e": "Secure Access Service Edge bundles SD-WAN with a secure web gateway, firewall as a service, a cloud access security broker, and zero trust network access."
+},
+{
+"d": 2,
+"s": "2.1",
+"q": "Users in two different VLANs can unexpectedly reach each other across a trunk. What should you check first?",
+"a": [
+"Whether the native VLAN matches on both ends of the trunk",
+"Whether the switches are running the same IOS version",
+"Whether PortFast is enabled on the trunk",
+"Whether the trunk cable is a crossover"
+],
+"c": 0,
+"e": "A native VLAN mismatch causes untagged traffic from one VLAN to land in another. It is both a connectivity fault and a VLAN hopping risk."
+},
+{
+"d": 2,
+"s": "2.1",
+"q": "A link is up but throughput is very poor, and the interface shows increasing late collisions and CRC errors. What is the most likely cause?",
+"a": [
+"A duplex mismatch",
+"A failed transceiver",
+"An MTU mismatch",
+"A routing loop"
+],
+"c": 0,
+"e": "Late collisions on a link that stays up is the signature of a duplex mismatch — one side full, the other half. The link never goes down, which is what makes it confusing."
+},
+{
+"d": 2,
+"s": "2.1",
+"q": "Why do Layer 2 switching loops require Spanning Tree Protocol when Layer 3 routing loops resolve themselves?",
+"a": [
+"Ethernet frames have no TTL field, so a looping frame circulates forever",
+"Layer 2 has no MAC address table to consult",
+"Routers forward faster than switches",
+"Layer 3 loops are prevented by ARP"
+],
+"c": 0,
+"e": "IP packets carry a TTL that is decremented at each hop and eventually discards the packet. Ethernet frames have no equivalent, so broadcast frames multiply until the network is saturated."
+},
+{
+"d": 2,
+"s": "2.1",
+"q": "An IP camera mounted outside the building has no nearby power outlet. Which technology solves this?",
+"a": [
+"Power over Ethernet",
+"A power distribution unit",
+"An uninterruptible power supply",
+"A media converter"
+],
+"c": 0,
+"e": "PoE delivers power and data over the same Ethernet cable, which is exactly why it suits cameras and access points in locations without power."
+},
+{
+"d": 2,
+"s": "2.1",
+"q": "A default-configured switch port shuts down and goes into err-disabled state after an unauthorised device is connected. Which violation mode is in effect?",
+"a": [
+"Shutdown",
+"Restrict",
+"Protect",
+"Monitor"
+],
+"c": 0,
+"e": "Shutdown is the default port security violation mode and requires manual recovery. Restrict drops and logs; protect drops silently."
+},
+{
+"d": 2,
+"s": "2.2",
+"q": "A router has both a static route and an OSPF route to the same prefix with the same prefix length. Which is installed?",
+"a": [
+"The static route, because its administrative distance is lower",
+"The OSPF route, because it is dynamically learned",
+"Both, load-balanced equally",
+"Neither, until the conflict is resolved manually"
+],
+"c": 0,
+"e": "Administrative distance breaks ties between protocols and lower wins. Static is 1, OSPF is 110. A stale static route silently overriding OSPF is a common real-world fault."
+},
+{
+"d": 2,
+"s": "2.2",
+"q": "Which criterion does a router evaluate first when selecting between multiple routes to a destination?",
+"a": [
+"The longest prefix match",
+"Administrative distance",
+"The metric",
+"The routing protocol's convergence time"
+],
+"c": 0,
+"e": "Most specific route wins, regardless of protocol or metric. Administrative distance and metric only come into play afterwards."
+},
+{
+"d": 2,
+"s": "2.2",
+"q": "Which first hop redundancy protocol load-balances traffic across multiple routers simultaneously?",
+"a": [
+"GLBP",
+"HSRP",
+"VRRP",
+"OSPF"
+],
+"c": 0,
+"e": "HSRP and VRRP are active/standby — only one router forwards. GLBP adds genuine load balancing across gateways."
+},
+{
+"d": 2,
+"s": "2.2",
+"q": "Which routing protocol is used between autonomous systems and forms the routing backbone of the internet?",
+"a": [
+"BGP",
+"OSPF",
+"EIGRP",
+"RIPv2"
+],
+"c": 0,
+"e": "BGP is a path-vector exterior gateway protocol. OSPF, EIGRP and RIP are interior gateway protocols operating within an autonomous system."
+},
+{
+"d": 2,
+"s": "2.2",
+"q": "What distinguishes traffic shaping from traffic policing?",
+"a": [
+"Shaping buffers and delays excess traffic; policing drops it",
+"Shaping drops excess traffic; policing buffers it",
+"Shaping operates at Layer 2; policing at Layer 3",
+"Shaping applies only to inbound traffic"
+],
+"c": 0,
+"e": "Shaping smooths bursts by queueing, which adds latency. Policing enforces a hard ceiling by discarding or re-marking, which does not."
+},
+{
+"d": 2,
+"s": "2.3",
+"q": "Which channels are the only non-overlapping ones in the 2.4 GHz band in North America?",
+"a": [
+"1, 6 and 11",
+"1, 5 and 9",
+"2, 7 and 12",
+"1, 4, 8 and 11"
+],
+"c": 0,
+"e": "Only 1, 6 and 11 do not overlap. Adjacent access points must use different non-overlapping channels or they degrade each other."
+},
+{
+"d": 2,
+"s": "2.3",
+"q": "What is the fundamental authentication difference between WPA2-Personal and WPA3-Personal?",
+"a": [
+"WPA2 uses one pre-shared key for all clients; WPA3 negotiates a separate key per device using SAE",
+"WPA3 uses a pre-shared key while WPA2 uses certificates",
+"WPA2 uses AES and WPA3 uses TKIP",
+"WPA3 authenticates against RADIUS while WPA2 does not"
+],
+"c": 0,
+"e": "With a PSK, cracking the single shared code exposes everyone. WPA3's Simultaneous Authentication of Equals gives each device its own negotiated key, so sessions are independent."
+},
+{
+"d": 2,
+"s": "2.3",
+"q": "An organisation must revoke one departing employee's wireless access without changing anything for other users. What should be deployed?",
+"a": [
+"WPA2 or WPA3 Enterprise with 802.1X and RADIUS",
+"WPA2-Personal with a strong pre-shared key",
+"MAC address filtering",
+"A hidden SSID"
+],
+"c": 0,
+"e": "Enterprise mode authenticates per user against RADIUS, so a single account can be disabled. A shared passphrase would have to be changed for everyone."
+},
+{
+"d": 2,
+"s": "2.3",
+"q": "A large campus is deploying forty access points that must share one configuration and channel plan. Which type should be used?",
+"a": [
+"Lightweight access points managed by a wireless LAN controller",
+"Autonomous access points configured individually",
+"Wireless repeaters chained together",
+"Consumer wireless routers in bridge mode"
+],
+"c": 0,
+"e": "Autonomous APs must each be edited separately, which does not scale. Lightweight APs take their configuration from a controller that also coordinates channels and roaming."
+},
+{
+"d": 2,
+"s": "2.3",
+"q": "Which antenna type would best link two buildings 500 metres apart?",
+"a": [
+"A directional antenna such as a Yagi or parabolic dish",
+"An omnidirectional antenna",
+"A patch antenna mounted indoors",
+"A dipole antenna at reduced power"
+],
+"c": 0,
+"e": "Directional antennas trade coverage area for range and gain by focusing the same transmit power into a beam."
+},
+{
+"d": 2,
+"s": "2.4",
+"q": "According to TIA/EIA structured cabling standards, what is the maximum length of the horizontal run from the equipment room to the wall outlet?",
+"a": [
+"90 metres",
+"100 metres",
+"6 metres",
+"3 metres"
+],
+"c": 0,
+"e": "The budget is 90 m horizontal, 6 m from outlet to computer, and 3 m from patch panel to rack equipment — which is how the familiar 100 m limit is actually apportioned."
+},
+{
+"d": 2,
+"s": "2.4",
+"q": "Why must a data centre HVAC system be able to stop ventilating during a fire?",
+"a": [
+"Circulating air feeds the fire",
+"Airflow interferes with smoke detectors",
+"Fans draw too much power during an emergency",
+"Humidity control must take priority"
+],
+"c": 0,
+"e": "The oxygen an HVAC system circulates makes a fire worse, so these systems detect fire and halt ventilation."
+},
+{
+"d": 2,
+"s": "2.4",
+"q": "How many broadcast domains does a single switch with four VLANs configured create?",
+"a": [
+"Four",
+"One",
+"Four times the number of ports",
+"One per port"
+],
+"c": 0,
+"e": "A switch is one broadcast domain by default, but each VLAN becomes its own broadcast domain requiring a Layer 3 device to route between them."
+},
+{
+"d": 3,
+"s": "3.1",
+"q": "Hosts on one VLAN receive APIPA addresses while every other VLAN gets addressing normally. What is the most likely cause?",
+"a": [
+"A missing IP helper address on that VLAN's router interface",
+"The DHCP server has failed",
+"The DHCP scope is exhausted network-wide",
+"DNS is misconfigured for that VLAN"
+],
+"c": 0,
+"e": "DHCP Discover is a broadcast and does not cross routers. Without a relay agent or IP helper on that interface, that one subnet cannot reach the server while others can."
+},
+{
+"d": 3,
+"s": "3.1",
+"q": "A printer must always receive the same IP address but remain centrally managed through DHCP. What should be configured?",
+"a": [
+"A DHCP reservation tied to the printer's MAC address",
+"A static IP address on the printer itself",
+"An exclusion range covering the printer",
+"A shorter lease duration for the printer"
+],
+"c": 0,
+"e": "A reservation keeps the address consistent while leaving management at the DHCP server, which preserves central visibility."
+},
+{
+"d": 3,
+"s": "3.1",
+"q": "Which DNS record type maps a hostname to an IPv6 address?",
+"a": [
+"AAAA",
+"A",
+"CNAME",
+"PTR"
+],
+"c": 0,
+"e": "A is IPv4, AAAA is IPv6, CNAME is an alias to another name, and PTR is used for reverse lookups."
+},
+{
+"d": 3,
+"s": "3.1",
+"q": "A technician shuts down the wrong interface on a remote router and loses all access to it. Which management approach would have prevented being locked out?",
+"a": [
+"Out-of-band management",
+"In-band management over SSH",
+"Web GUI management over HTTPS",
+"API-based management"
+],
+"c": 0,
+"e": "In-band management depends on the production network you may have just broken. Out-of-band uses a separate path such as a console server or cellular modem, so it survives the outage."
+},
+{
+"d": 3,
+"s": "3.1",
+"q": "Why does inaccurate time on network devices cause authentication failures?",
+"a": [
+"Kerberos rejects requests outside a small clock skew tolerance",
+"Passwords expire based on device local time",
+"DNS refuses to resolve names on unsynchronised hosts",
+"DHCP leases cannot be issued without accurate time"
+],
+"c": 0,
+"e": "Kerberos is time-sensitive, and certificate validity checking also depends on accurate time. Log correlation across devices breaks as well, which is why NTP matters more than it appears."
+},
+{
+"d": 3,
+"s": "3.2",
+"q": "Which technology tells you what the traffic on a saturated link actually consists of, rather than just how much there is?",
+"a": [
+"NetFlow",
+"SNMP",
+"Syslog",
+"ICMP"
+],
+"c": 0,
+"e": "SNMP reports interface counters and volume. NetFlow records flows — source, destination, ports, protocol, duration — which answers why the link is saturated."
+},
+{
+"d": 3,
+"s": "3.2",
+"q": "Which SNMP version should be used when the requirement is authenticated and encrypted management traffic?",
+"a": [
+"SNMPv3",
+"SNMPv2c",
+"SNMPv1",
+"SNMPv2"
+],
+"c": 0,
+"e": "v1 and v2c transmit community strings in cleartext. Only v3 adds authentication and encryption."
+},
+{
+"d": 3,
+"s": "3.2",
+"q": "On the syslog severity scale, which level is the most severe?",
+"a": [
+"0, Emergency",
+"7, Debug",
+"1, Alert",
+"4, Warning"
+],
+"c": 0,
+"e": "Zero is most severe and seven is most verbose. Leaving a device at debug level in production can generate enough logging to affect performance."
+},
+{
+"d": 3,
+"s": "3.2",
+"q": "Why is a network performance baseline valuable?",
+"a": [
+"It provides a record of normal operation so deviations can be identified and justified",
+"It automatically prevents congestion from occurring",
+"It replaces the need for SNMP monitoring",
+"It guarantees the service level agreement will be met"
+],
+"c": 0,
+"e": "Without a baseline, 'the network is slow' cannot be proven or disproven. With one, you can show a link that normally runs at 30 percent is now at 85."
+},
+{
+"d": 3,
+"s": "3.3",
+"q": "An organisation states that no more than one hour of data may be lost in a disaster. Which metric has been defined?",
+"a": [
+"Recovery point objective",
+"Recovery time objective",
+"Mean time to repair",
+"Mean time between failures"
+],
+"c": 0,
+"e": "RPO is the tolerance for data loss, measured backwards from the incident, and it drives backup frequency. RTO is the tolerance for downtime."
+},
+{
+"d": 3,
+"s": "3.3",
+"q": "A system operated for 1,000 hours and failed four times. What is its MTBF?",
+"a": [
+"250 hours",
+"4,000 hours",
+"1,000 hours",
+"400 hours"
+],
+"c": 0,
+"e": "MTBF is total operating time divided by number of failures: 1000 divided by 4 equals 250 hours. Higher values indicate greater reliability."
+},
+{
+"d": 3,
+"s": "3.3",
+"q": "A business has an RTO measured in minutes. Which disaster recovery site satisfies that requirement?",
+"a": [
+"A hot site",
+"A warm site",
+"A cold site",
+"Any site, provided backups are current"
+],
+"c": 0,
+"e": "Only a hot site, with hardware running and data continuously replicated, recovers in minutes. Warm takes hours to days and cold takes days to weeks."
+},
+{
+"d": 3,
+"s": "3.3",
+"q": "Two NICs are teamed on a server, both connected to the same switch. Which failure does this configuration NOT protect against?",
+"a": [
+"Failure of that switch",
+"Failure of one NIC",
+"Failure of one cable",
+"Failure of one switch port"
+],
+"c": 0,
+"e": "Teaming into a single switch leaves that switch as a single point of failure. Homing the team into two different switches covers the larger failure domain."
+},
+{
+"d": 3,
+"s": "3.3",
+"q": "Which backup type requires the last full backup plus only the most recent backup of its own type to restore?",
+"a": [
+"Differential",
+"Incremental",
+"Full",
+"Synthetic"
+],
+"c": 0,
+"e": "Differential captures everything changed since the last full, so restore needs just the full plus the latest differential. Incremental restores need the full plus every incremental since."
+},
+{
+"d": 3,
+"s": "3.4",
+"q": "A product has reached end of life but not yet end of support. What does this mean?",
+"a": [
+"It is no longer sold but still receives limited updates",
+"It receives no further updates of any kind",
+"It has been recalled by the manufacturer",
+"It can no longer be legally operated"
+],
+"c": 0,
+"e": "End of life means the product is no longer sold. End of support, often two or more years later, means no more updates or patches at all — which is when unpatched vulnerabilities become permanent."
+},
+{
+"d": 3,
+"s": "3.4",
+"q": "Which wireless site survey type requires actually connecting to the access point?",
+"a": [
+"Active",
+"Passive",
+"Predictive",
+"Spectral"
+],
+"c": 0,
+"e": "Passive measures signal strength, coverage and interference without associating. Active connects and measures throughput, packet loss and data rates — showing whether data is actually getting through."
+},
+{
+"d": 3,
+"s": "3.4",
+"q": "An outage is traced to an undocumented hardware swap performed without approval. Which process failed?",
+"a": [
+"Change management",
+"Incident response",
+"Asset inventory",
+"Capacity planning"
+],
+"c": 0,
+"e": "Change management exists to plan, test, approve and document changes so they do not cause unexpected disruption — including defining a rollback plan before work begins."
+},
+{
+"d": 3,
+"s": "3.4",
+"q": "Which tool centrally manages DHCP and DNS servers and monitors address pool utilisation across an organisation?",
+"a": [
+"IPAM",
+"SNMP",
+"NetFlow",
+"SIEM"
+],
+"c": 0,
+"e": "IP Address Management presents multiple DHCP and DNS servers through a single interface and alerts on pool exhaustion before users start seeing APIPA addresses."
+},
+{
+"d": 4,
+"s": "4.1",
+"q": "Which security principle does hashing protect?",
+"a": [
+"Integrity",
+"Confidentiality",
+"Availability",
+"Non-repudiation only"
+],
+"c": 0,
+"e": "Hashing is one-way and verifies that data has not been altered. Encryption protects confidentiality; redundancy protects availability."
+},
+{
+"d": 4,
+"s": "4.1",
+"q": "Why does TLS use both asymmetric and symmetric cryptography?",
+"a": [
+"Asymmetric exchanges the session key; symmetric encrypts the bulk data because it is far faster",
+"Asymmetric encrypts the data and symmetric verifies the certificate",
+"Symmetric is used for the handshake and asymmetric for the payload",
+"Both are used identically for redundancy"
+],
+"c": 0,
+"e": "Asymmetric cryptography solves key distribution but is slow. Once a symmetric session key has been exchanged, the bulk transfer uses the faster symmetric algorithm."
+},
+{
+"d": 4,
+"s": "4.1",
+"q": "A deliberately vulnerable system is deployed to observe attacker behaviour and tune intrusion detection. What is it?",
+"a": [
+"A honeypot",
+"A jump server",
+"A DMZ host",
+"A bastion firewall"
+],
+"c": 0,
+"e": "A honeypot is a virtual trap. The intelligence gathered helps configure automated detection and reduce false positives."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Which access control method authenticates an identity rather than a hardware address?",
+"a": [
+"802.1X",
+"MAC filtering",
+"Port security",
+"VLAN assignment"
+],
+"c": 0,
+"e": "MAC addresses travel in cleartext and are trivially spoofed. 802.1X authenticates a user or device credential against a RADIUS server before opening the port."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "An ACL is not blocking traffic that a specific deny rule addresses. What should you check?",
+"a": [
+"Whether a permit rule appears above the deny rule",
+"Whether the ACL has been saved to startup configuration",
+"Whether the interface is running at the correct duplex",
+"Whether the ACL uses IPv4 or IPv6 syntax"
+],
+"c": 0,
+"e": "ACLs are processed top to bottom and the first match wins, so a permissive rule placed above a restrictive one makes the restrictive rule unreachable."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Which AAA protocol encrypts the entire payload and separates authentication, authorisation and accounting?",
+"a": [
+"TACACS+",
+"RADIUS",
+"LDAP",
+"Kerberos"
+],
+"c": 0,
+"e": "RADIUS encrypts only the password and combines authentication with authorisation. TACACS+ encrypts everything and separates all three, which is why it is preferred for device administration."
+},
+{
+"d": 4,
+"s": "4.3",
+"q": "Which physical control specifically prevents tailgating?",
+"a": [
+"An access control vestibule",
+"A security camera",
+"Perimeter fencing",
+"Motion detection"
+],
+"c": 0,
+"e": "A mantrap or access control vestibule uses two interlocking doors so only one person passes at a time. Cameras are detective, not preventative."
+},
+{
+"d": 4,
+"s": "4.4",
+"q": "A technician needs to change a switch's default password. Which method is acceptable?",
+"a": [
+"Over SSH or a console connection",
+"Over Telnet",
+"Over HTTP",
+"Over TFTP"
+],
+"c": 0,
+"e": "Telnet and HTTP transmit in cleartext, so changing a password over them exposes the new credential immediately. Use SSH or direct console access."
+},
+{
+"d": 4,
+"s": "4.4",
+"q": "What is the practical difference between a firewall rule that drops traffic and one that rejects it?",
+"a": [
+"A drop is silent and produces a timeout; a reject sends notification and fails immediately",
+"A drop logs the attempt while a reject does not",
+"A drop applies inbound and a reject applies outbound",
+"There is no functional difference"
+],
+"c": 0,
+"e": "Dropping reveals nothing to a scanner but gives legitimate users confusing timeouts. Rejecting fails fast and clearly but confirms the host exists."
+},
+{
+"d": 4,
+"s": "4.4",
+"q": "An access point's signal reaches well into the car park. What should be adjusted?",
+"a": [
+"Reduce the transmit power",
+"Increase the transmit power",
+"Hide the SSID",
+"Change to a lower channel"
+],
+"c": 0,
+"e": "Excess transmit power extends your attack surface geographically. Tune power so coverage matches the space you intend to serve."
+},
+{
+"d": 4,
+"s": "4.4",
+"q": "What is the recommended approach for a fleet of IoT devices with default credentials and no patch path?",
+"a": [
+"Place them on a segmented VLAN with tightly restricted access",
+"Place them on the same VLAN as workstations for easier monitoring",
+"Assign each a public IP address for remote management",
+"Disable logging to reduce noise"
+],
+"c": 0,
+"e": "Segmentation contains devices you cannot properly secure, limiting what an attacker reaches after compromising one."
+},
+{
+"d": 5,
+"s": "5.1",
+"q": "You have just tested your theory and confirmed the cause. According to the CompTIA methodology, what is the next step?",
+"a": [
+"Establish a plan of action and identify potential effects",
+"Implement the solution",
+"Verify full system functionality",
+"Document findings, actions and outcomes"
+],
+"c": 0,
+"e": "The order is identify, theorise, test, plan, implement, verify, document. Planning sits between confirming the cause and implementing the fix."
+},
+{
+"d": 5,
+"s": "5.1",
+"q": "A technician replaces a suspect cable and leaves without checking. Which step of the methodology was skipped?",
+"a": [
+"Testing the theory to determine the cause",
+"Establishing a theory of probable cause",
+"Documenting the outcome",
+"Identifying the problem"
+],
+"c": 0,
+"e": "A theory must be validated. Installing a new cable and walking away assumes the theory was right — if the user still cannot connect, the theory was actually disproved."
+},
+{
+"d": 5,
+"s": "5.1",
+"q": "A user can access internal file shares and printers but not the internet. Which troubleshooting approach is most efficient?",
+"a": [
+"Top-down, starting with DNS and application-layer services",
+"Bottom-up, starting with the cable and NIC",
+"Replacing the network adapter first",
+"Rebooting the switch"
+],
+"c": 0,
+"e": "Working access to internal resources eliminates the physical and data link layers entirely, so starting at the top finds the fault fastest."
+},
+{
+"d": 5,
+"s": "5.1",
+"q": "Internet access is lost for one host. Which single failure is statistically more likely?",
+"a": [
+"The default gateway, because most clients have only one",
+"Both configured DNS servers failing simultaneously",
+"The client's NIC and its cable failing together",
+"The ISP's core router"
+],
+"c": 0,
+"e": "Prioritise by likelihood, not just possibility. Most clients have two DNS servers but only one default gateway, so a single gateway failure is far more probable."
+},
+{
+"d": 5,
+"s": "5.1",
+"q": "Why should failed corrective actions be recorded in troubleshooting documentation?",
+"a": [
+"So a future technician does not waste time repeating them",
+"To assign responsibility for the failed attempt",
+"Because compliance frameworks require a failure log",
+"To justify escalation to management"
+],
+"c": 0,
+"e": "The knowledge base is only useful if it records what did not work as well as what did. That is half its value."
+},
+{
+"d": 5,
+"s": "5.2",
+"q": "A successful ping to 127.0.0.1 proves what?",
+"a": [
+"TCP/IP is correctly installed and bound to the local adapter",
+"The default gateway is reachable",
+"DNS resolution is working",
+"The switch port is functioning"
+],
+"c": 0,
+"e": "The loopback address tests the local TCP/IP stack without touching the network. Success rules out the local adapter as the cause."
+},
+{
+"d": 5,
+"s": "5.2",
+"q": "Which tool identifies a break in a copper cable and reports the distance to the fault?",
+"a": [
+"A time domain reflectometer",
+"A cable tester",
+"A toner and probe",
+"A loopback plug"
+],
+"c": 0,
+"e": "A TDR reports distance to the fault, so you can go to the spot instead of replacing the entire run. A tester only confirms continuity and pinout."
+},
+{
+"d": 5,
+"s": "5.2",
+"q": "What does a cable certifier do that a cable tester does not?",
+"a": [
+"Verifies the run meets a performance standard such as Cat 6 at its rated speed",
+"Locates the far end of a cable in a bundle",
+"Detects the presence of PoE voltage",
+"Measures optical power on fibre"
+],
+"c": 0,
+"e": "A cable can pass continuity testing and still fail to carry gigabit reliably. Certification tests against the performance specification."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "Ping succeeds but large file transfers hang or fail across a particular path. What should you investigate?",
+"a": [
+"An MTU mismatch along the path",
+"A DNS misconfiguration",
+"An expired DHCP lease",
+"A duplicate MAC address"
+],
+"c": 0,
+"e": "Small packets pass while large ones are fragmented or black-holed when the Don't Fragment bit is set. Test with ping using the DF flag and varying sizes to find the real path MTU."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "A DHCP scope was configured as 192.168.1.100 to 192.168.1.200, and a server already uses 192.168.1.150 statically. What will happen?",
+"a": [
+"A duplicate IP address conflict when that address is leased",
+"The DHCP server will detect and skip the address automatically",
+"The static host will lose its address at the next renewal",
+"Nothing, because static addresses take precedence"
+],
+"c": 0,
+"e": "The scope must exclude any statically assigned addresses inside its range. Otherwise the server will eventually lease .150 to a client and both hosts will have connectivity problems."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "Which condition describes signal from one wire inside an Ethernet cable being picked up by another wire in the same cable?",
+"a": [
+"Crosstalk",
+"Attenuation",
+"Electromagnetic interference",
+"Jitter"
+],
+"c": 0,
+"e": "Crosstalk refers to the individual conductors inside one cable, not two cables run alongside each other. Common causes include damage near the connector and too much copper exposed during crimping."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "A connection attempt times out rather than being refused immediately. What does this suggest?",
+"a": [
+"A device in the path is silently dropping the traffic",
+"No service is listening on that port",
+"The DNS record is missing",
+"The cable is disconnected"
+],
+"c": 0,
+"e": "A timeout points to something discarding traffic silently, typically a firewall configured to drop. An immediate refusal means the packet reached a host that actively said no."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "Guest wireless users in a busy conference centre stop receiving addresses by mid-morning, though the scope is large. What should be adjusted?",
+"a": [
+"Shorten the DHCP lease duration",
+"Lengthen the DHCP lease duration",
+"Disable the DHCP relay agent",
+"Increase the wireless transmit power"
+],
+"c": 0,
+"e": "In high-turnover environments long leases keep addresses reserved for devices that have already left, exhausting the pool. Shorter leases return addresses sooner."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "A browser reports a certificate error after a web server was renamed. What is the most likely cause?",
+"a": [
+"A name mismatch between the server and the name on its certificate",
+"The certificate's private key was deleted",
+"The root CA revoked the certificate",
+"The server's cipher suite is unsupported"
+],
+"c": 0,
+"e": "Renaming a server so that its name no longer matches the certificate invalidates the certificate entirely. Incorrect system time causes a similar symptom for a different reason."
+},
+{
+"d": 5,
+"s": "5.3",
+"q": "Several unrelated devices fail at the same moment in the same rack. What should you investigate first?",
+"a": [
+"A shared upstream cause such as power, cooling or a common uplink",
+"Each device individually, starting with the oldest",
+"The firewall rule base",
+"DNS server availability"
+],
+"c": 0,
+"e": "Determining scope is step one of the methodology. Simultaneous widespread failure almost always has one shared cause rather than many coincidental ones."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "An attacker floods a switch with frames carrying thousands of forged source MAC addresses. What is the consequence once the MAC address table fills?",
+"a": [
+"The switch floods frames out every port, letting the attacker see other hosts' traffic",
+"The switch reboots and clears its configuration",
+"All VLANs merge into a single broadcast domain",
+"Spanning Tree recalculates and blocks the attacker's port"
+],
+"c": 0,
+"e": "MAC flooding exhausts the CAM table so the switch can no longer look up destinations and reverts to hub-like flooding. An availability attack that becomes a confidentiality attack. Port security is the control."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Which control specifically defends against a rogue DHCP server?",
+"a": [
+"DHCP snooping",
+"Dynamic ARP Inspection",
+"Port security",
+"DNSSEC"
+],
+"c": 0,
+"e": "DHCP snooping permits DHCP server responses only from trusted ports. DAI addresses ARP poisoning and DNSSEC addresses DNS poisoning."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "An attacker crafts a frame with two 802.1Q tags so the first switch strips the outer tag and the second delivers it into a different VLAN. What is this, and what prevents it?",
+"a": [
+"Double tagging, prevented by using an unused native VLAN",
+"Switch spoofing, prevented by disabling trunk negotiation",
+"MAC flooding, prevented by port security",
+"ARP poisoning, prevented by DAI"
+],
+"c": 0,
+"e": "Double tagging exploits the native VLAN, which crosses trunks untagged. Setting the native VLAN to an unused one defeats it. It is also one-way — the attacker receives nothing back."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Hosts on a subnet show the default gateway's IP mapped to an unexpected MAC address, and the same MAC appears for several IPs. What is happening?",
+"a": [
+"ARP poisoning positioning an on-path attacker",
+"A duplicate IP address conflict",
+"A switching loop",
+"DNS cache poisoning"
+],
+"c": 0,
+"e": "ARP has no authentication, so an attacker can claim the gateway's IP. Two IPs resolving to one MAC is the detection signature. Dynamic ARP Inspection is the control."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "What distinguishes a worm from a virus?",
+"a": [
+"A worm self-replicates across the network with no user interaction",
+"A worm attaches itself to an executable file",
+"A worm always encrypts data and demands payment",
+"A worm only runs in memory and never touches disk"
+],
+"c": 0,
+"e": "A virus needs a user to open or run something. A worm needs nothing, which is why worms spread so fast. Rapid spread with no user action means worm."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "An attacker sends small spoofed queries to public DNS servers so that large responses are directed at a victim. What is this technique?",
+"a": [
+"Amplification, a form of DDoS",
+"Credential stuffing",
+"DNS tunnelling",
+"A logic bomb"
+],
+"c": 0,
+"e": "The attacker spoofs the victim's address as the source, so replies go to the victim. A small query producing a large answer multiplies the attacker's own bandwidth."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "A WAN link becomes unusable during a nightly backup window. No malicious activity is found. How is this best classified?",
+"a": [
+"An unintentional or friendly denial of service",
+"A distributed denial of service",
+"A resource exhaustion attack",
+"A logic bomb"
+],
+"c": 0,
+"e": "Not every outage is an attack. Legitimate traffic saturating a link, or a misconfiguration causing a loop, produces denial of service without an attacker."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Which social engineering attack targets executives specifically?",
+"a": [
+"Whaling",
+"Vishing",
+"Smishing",
+"Pretexting"
+],
+"c": 0,
+"e": "Whaling is spear phishing aimed at high-value individuals such as executives. Vishing is by voice, smishing by SMS, and pretexting invents a scenario to establish false legitimacy."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Which backup practice is the meaningful defence against ransomware?",
+"a": [
+"An offline or immutable copy that the attacker cannot encrypt",
+"Increasing backup frequency to hourly",
+"Storing backups on the same SAN as production",
+"Compressing backups to reduce restore time"
+],
+"c": 0,
+"e": "An attacker who can reach and encrypt your backups has defeated the strategy entirely. Offline or immutable copies are what survive, which is the point of the off-site element of 3-2-1."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "An attacker connects a device that negotiates a trunk link with a switch, gaining access to all VLANs. What prevents this?",
+"a": [
+"Explicitly configuring access ports and disabling trunk negotiation",
+"Enabling PortFast on all access ports",
+"Increasing the MAC address table size",
+"Enabling BPDU Guard on trunk links"
+],
+"c": 0,
+"e": "Switch spoofing works because the port will negotiate a trunk. Setting ports explicitly to access mode and disabling dynamic negotiation removes the opportunity."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "A user reaches a site with the correct name in the address bar, but the browser reports a certificate error and the page looks wrong. What is most likely?",
+"a": [
+"DNS poisoning redirecting the name to an attacker's address",
+"An expired session cookie",
+"A duplex mismatch on the path",
+"A DHCP scope exhaustion"
+],
+"c": 0,
+"e": "The attacker can redirect the name but cannot produce a valid certificate for it, so the warning fires. That warning is the user's last line of defence, which is why training people to click through it is damaging."
+},
+{
+"d": 4,
+"s": "4.2",
+"q": "Which attack tries one common password across many accounts rather than many passwords against one account?",
+"a": [
+"Password spraying",
+"Brute force",
+"Credential stuffing",
+"Rainbow table attack"
+],
+"c": 0,
+"e": "Spraying avoids triggering account lockout by limiting attempts per account. Credential stuffing reuses credentials leaked from a different breach."
+},
+{
+"d": 3,
+"s": "3.5",
+"q": "A remote worker's VPN is configured so that only corporate-bound traffic goes through the tunnel while internet traffic goes direct. What is this, and what is the trade-off?",
+"a": [
+"Split tunnel — better performance, but direct traffic is uninspected",
+"Full tunnel — better security, but higher bandwidth cost",
+"Site-to-site — simpler routing, but no client control",
+"Clientless — easier deployment, but no encryption"
+],
+"c": 0,
+"e": "Split tunnelling avoids backhauling internet traffic through headquarters, but anything going direct bypasses corporate inspection. Full tunnel inspects everything at the cost of performance."
+},
+{
+"d": 3,
+"s": "3.5",
+"q": "Why is a jump server considered both a strong control and a significant risk?",
+"a": [
+"It concentrates administrative access into one hardened, audited chokepoint — which also makes it a high-value single point of failure",
+"It encrypts all traffic but cannot log sessions",
+"It replaces the need for multi-factor authentication",
+"It only works for Linux hosts"
+],
+"c": 0,
+"e": "Funnelling administrative access through one monitored host reduces attack surface and centralises logging. Compromise it and you have compromised the path to everything behind it."
+},
+{
+"d": 5,
+"s": "5.4",
+"q": "Ping times to a VoIP server are consistently low, yet users report choppy, broken audio. What should you investigate?",
+"a": [
+"Jitter — variation in packet arrival time",
+"Insufficient bandwidth on the link",
+"DNS resolution delays",
+"An MTU mismatch"
+],
+"c": 0,
+"e": "Average latency can look excellent while calls are unusable, because voice depends on consistency of arrival rather than average speed. Good ping plus bad call quality points at jitter."
+},
+{
+"d": 5,
+"s": "5.4",
+"q": "A gigabit link shows low utilisation but transfers achieve only a fraction of the expected speed. What should you check first?",
+"a": [
+"Interface error counters and duplex settings",
+"Whether the link needs upgrading to 10 Gbps",
+"The DNS server configuration",
+"The DHCP lease duration"
+],
+"c": 0,
+"e": "Bandwidth and throughput are different measures. A gap between them points to duplex mismatch, retransmissions, MTU problems or device CPU — not to needing a bigger link."
+}
+]

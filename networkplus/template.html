@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network+ N10-009 — Interactive Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pair-blue:#1B5E9E; --pair-green:#2F7D4F; --pair-orange:#BE4F1B; --pair-brown:#6E4B31;
+  --ink:#14181B; --ink-2:#4A5257; --ink-3:#79838A;
+  --surface:#E9ECEA; --panel:#FFFFFF; --line:#CFD5D2; --line-2:#E2E7E4;
+  --blue-wash:#E8F0F8; --green-wash:#E7F1EA; --orange-wash:#FAEDE5;
+  --shadow:0 1px 0 rgba(20,24,27,.06);
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --pair-blue:#6FA8DC; --pair-green:#6BBF8B; --pair-orange:#E08B5C; --pair-brown:#B48F6E;
+    --ink:#E6E9E7; --ink-2:#A8B2B7; --ink-3:#7C878D;
+    --surface:#101416; --panel:#191E21; --line:#2C3438; --line-2:#232A2E;
+    --blue-wash:#16242F; --green-wash:#16261D; --orange-wash:#2A1C13;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --pair-blue:#6FA8DC; --pair-green:#6BBF8B; --pair-orange:#E08B5C; --pair-brown:#B48F6E;
+  --ink:#E6E9E7; --ink-2:#A8B2B7; --ink-3:#7C878D;
+  --surface:#101416; --panel:#191E21; --line:#2C3438; --line-2:#232A2E;
+  --blue-wash:#16242F; --green-wash:#16261D; --orange-wash:#2A1C13;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--surface); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.62;
+  -webkit-text-size-adjust:100%;
+}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--pair-blue)}
+
+/* ---------- rack strip (top bar) ---------- */
+.rack{
+  position:sticky; top:0; z-index:40;
+  background:var(--panel); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:10px 16px;
+}
+.brand{font-family:var(--sans); font-weight:800; letter-spacing:-.02em; font-size:16px; line-height:1.1}
+.brand span{display:block; font-weight:500; font-size:11.5px; color:var(--ink-3); letter-spacing:.01em}
+.modes{display:flex; gap:2px; margin-left:auto; flex-wrap:wrap}
+.mode{
+  font-family:var(--sans); font-size:13.5px; font-weight:600;
+  background:transparent; border:1px solid transparent; border-radius:3px;
+  padding:6px 11px; cursor:pointer; color:var(--ink-2);
+}
+.mode:hover{background:var(--line-2)}
+.mode[aria-selected="true"]{background:var(--pair-blue); color:#fff; border-color:var(--pair-blue)}
+.iconbtn{background:transparent;border:1px solid var(--line);border-radius:3px;padding:6px 9px;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--ink-2)}
+.iconbtn:hover{background:var(--line-2)}
+
+/* ---------- layout ---------- */
+.shell{display:flex; align-items:flex-start; max-width:1400px; margin:0 auto}
+.rail{
+  width:286px; flex:0 0 286px; position:sticky; top:57px;
+  height:calc(100vh - 57px); overflow-y:auto;
+  border-right:1px solid var(--line); background:var(--panel);
+  padding:14px 0 40px;
+}
+.main{flex:1; min-width:0; padding:26px 40px 90px; max-width:860px}
+
+/* ---------- patch panel nav ---------- */
+.panelgroup{padding:0 14px; margin-bottom:16px}
+.panelgroup h4{
+  font-family:var(--sans); font-size:11px; font-weight:700; color:var(--ink-3);
+  margin:12px 0 7px; letter-spacing:.02em;
+}
+.port{
+  display:flex; align-items:center; gap:9px; width:100%;
+  background:transparent; border:1px solid var(--line-2); border-radius:2px;
+  padding:6px 8px; margin-bottom:3px; cursor:pointer; text-align:left;
+  font-family:var(--sans); font-size:13px; line-height:1.3; color:var(--ink-2);
+}
+.port:hover{border-color:var(--pair-blue); color:var(--ink)}
+.port[aria-current="true"]{background:var(--blue-wash); border-color:var(--pair-blue); color:var(--ink); font-weight:600}
+.led{
+  flex:0 0 8px; width:8px; height:8px; border-radius:50%;
+  background:var(--line); border:1px solid var(--line);
+}
+.port.done .led{background:var(--pair-green); border-color:var(--pair-green); box-shadow:0 0 5px var(--pair-green)}
+.port .pnum{font-family:var(--mono); font-size:11px; color:var(--ink-3); flex:0 0 auto; min-width:26px}
+
+/* ---------- content ---------- */
+.sectionhead{border-bottom:2px solid var(--ink); padding-bottom:10px; margin-bottom:20px}
+.sectionhead .eyebrow{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--pair-blue);margin-bottom:3px}
+.sectionhead h2{font-family:var(--sans); font-size:29px; font-weight:800; letter-spacing:-.025em; margin:0; line-height:1.15}
+.doc h1{display:none}
+.doc h2{display:none}
+.doc h3{font-family:var(--sans); font-size:20px; font-weight:700; letter-spacing:-.015em; margin:32px 0 10px; padding-top:4px}
+.doc h4{font-family:var(--sans); font-size:16px; font-weight:700; margin:22px 0 6px}
+.doc p{margin:0 0 13px}
+.doc ul,.doc ol{margin:0 0 14px; padding-left:22px}
+.doc li{margin-bottom:5px}
+.doc strong{font-weight:600}
+.doc em{font-style:italic}
+.doc code{font-family:var(--mono); font-size:.86em; background:var(--line-2); padding:1px 5px; border-radius:2px}
+.doc pre{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--pair-brown); padding:14px 16px; overflow-x:auto; border-radius:2px; margin:0 0 16px}
+.doc pre code{background:none; padding:0; font-size:13px; line-height:1.6}
+.doc hr{border:none; border-top:1px solid var(--line); margin:30px 0}
+.doc blockquote{border-left:3px solid var(--line); margin:0 0 14px; padding-left:14px; color:var(--ink-2)}
+.tablewrap{overflow-x:auto; margin:0 0 18px; border:1px solid var(--line); border-radius:2px; background:var(--panel)}
+.doc table{border-collapse:collapse; width:100%; font-family:var(--sans); font-size:14px}
+.doc th{
+  text-align:left; font-weight:700; background:var(--line-2);
+  padding:8px 12px; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+.doc td{padding:8px 12px; border-bottom:1px solid var(--line-2); vertical-align:top}
+.doc tr:last-child td{border-bottom:none}
+.doc td code{font-size:.9em}
+
+/* callouts */
+.callout{border-left:3px solid; padding:11px 15px; margin:0 0 15px; border-radius:0 2px 2px 0; font-size:16.5px}
+.callout.pin{border-color:var(--pair-green); background:var(--green-wash)}
+.callout.trap{border-color:var(--pair-orange); background:var(--orange-wash)}
+.callout.both{border-color:var(--pair-orange); background:var(--orange-wash); box-shadow:inset 3px 0 0 var(--pair-green)}
+.callout p:last-child{margin-bottom:0}
+.lab{border:1px dashed var(--pair-brown); background:var(--panel); padding:14px 16px; border-radius:2px; margin:22px 0}
+.lab h3{margin-top:0 !important; color:var(--pair-brown); font-size:16px}
+
+.notes{margin-top:30px;border:1px solid var(--line);border-left:3px solid var(--pair-brown);border-radius:2px;background:var(--panel);padding:13px 15px}
+.noteshead{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--pair-brown);margin-bottom:7px}
+.notestate{font-weight:500;color:var(--ink-3);font-size:11.5px}
+.notes textarea{width:100%;min-height:105px;resize:vertical;border:1px solid var(--line);border-radius:2px;background:var(--surface);color:var(--ink);font-family:var(--serif);font-size:15.5px;line-height:1.55;padding:9px 11px}
+.notes textarea:focus{outline:2px solid var(--pair-blue);outline-offset:-1px}
+.hasnote{margin-left:auto;flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:var(--pair-brown)}
+.secfoot{display:flex; gap:10px; align-items:center; margin-top:34px; padding-top:16px; border-top:1px solid var(--line); flex-wrap:wrap}
+.btn{
+  font-family:var(--sans); font-size:14px; font-weight:600; cursor:pointer;
+  background:var(--pair-blue); color:#fff; border:1px solid var(--pair-blue);
+  border-radius:3px; padding:8px 15px;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent; color:var(--ink-2); border-color:var(--line)}
+.btn.ghost:hover{background:var(--line-2); color:var(--ink)}
+.btn.good{background:var(--pair-green); border-color:var(--pair-green)}
+.btn:disabled{opacity:.45; cursor:default}
+
+/* ---------- search ---------- */
+.searchbox{padding:0 14px 10px}
+.searchbox input{
+  width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:3px;
+  background:var(--surface); font-family:var(--sans); font-size:13.5px;
+}
+.searchbox input:focus{outline:2px solid var(--pair-blue); outline-offset:-1px}
+
+/* ---------- drills ---------- */
+.drill{max-width:720px}
+.drill h2{font-family:var(--sans); font-size:27px; font-weight:800; letter-spacing:-.025em; margin:0 0 4px}
+.drill .lede{color:var(--ink-2); margin:0 0 22px; font-size:16px}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:22px; margin-bottom:16px; box-shadow:var(--shadow)}
+.prompt{font-family:var(--sans); font-size:21px; font-weight:600; line-height:1.35; margin:0 0 16px}
+.prompt .big{font-family:var(--mono); font-size:34px; font-weight:600; color:var(--pair-blue); display:block; margin:4px 0 2px}
+.answers{display:grid; gap:7px}
+.ans{
+  font-family:var(--sans); font-size:15px; text-align:left; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:10px 13px;
+}
+.ans:hover:not(:disabled){border-color:var(--pair-blue)}
+.ans.correct{background:var(--green-wash); border-color:var(--pair-green); font-weight:600}
+.ans.wrong{background:var(--orange-wash); border-color:var(--pair-orange)}
+.ans:disabled{cursor:default}
+.numin{
+  font-family:var(--mono); font-size:22px; width:150px; padding:9px 12px;
+  border:1px solid var(--line); border-radius:3px; background:var(--surface);
+}
+.numin:focus{outline:2px solid var(--pair-blue); outline-offset:-1px}
+.verdict{font-family:var(--sans); font-weight:700; font-size:15px; margin:14px 0 0}
+.verdict.ok{color:var(--pair-green)}
+.verdict.no{color:var(--pair-orange)}
+.explain{font-size:15.5px; margin:8px 0 0; color:var(--ink-2)}
+.scorebar{display:flex; gap:20px; font-family:var(--sans); font-size:13px; color:var(--ink-2); margin-bottom:18px; flex-wrap:wrap}
+.scorebar b{font-family:var(--mono); color:var(--ink); font-size:15px; display:block; font-weight:600}
+.subnetgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin:6px 0 4px}
+.field label{display:block; font-family:var(--sans); font-size:12.5px; font-weight:600; color:var(--ink-2); margin-bottom:4px}
+.field input{width:100%; font-family:var(--mono); font-size:15px; padding:8px 10px; border:1px solid var(--line); border-radius:3px; background:var(--surface)}
+.field input:focus{outline:2px solid var(--pair-blue); outline-offset:-1px}
+.field input.ok{border-color:var(--pair-green); background:var(--green-wash)}
+.field input.no{border-color:var(--pair-orange); background:var(--orange-wash)}
+.work{font-family:var(--mono); font-size:13.5px; line-height:1.75; background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:13px 15px; margin-top:14px; white-space:pre-wrap}
+.flip{min-height:190px; display:flex; flex-direction:column; justify-content:center}
+.cardmeta{font-family:var(--sans); font-size:12.5px; font-weight:600; margin-bottom:10px}
+.cardmeta.pin{color:var(--pair-green)}
+.cardmeta.trap{color:var(--pair-orange)}
+.cardbody{font-size:17px}
+.cardbody strong{font-weight:600}
+.cardbody code{font-family:var(--mono);font-size:.87em;background:var(--line-2);padding:1px 4px;border-radius:2px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.pill{font-family:var(--sans); font-size:12px; font-weight:600; padding:3px 9px; border-radius:11px; border:1px solid var(--line); color:var(--ink-2)}
+.selectrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+select{padding:7px 10px;border:1px solid var(--line);border-radius:3px;background:var(--panel);font-family:var(--sans);font-size:14px}
+.progressgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(38px,1fr)); gap:5px; margin:14px 0 6px}
+.pcell{aspect-ratio:1; border:1px solid var(--line); border-radius:2px; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:var(--ink-3); cursor:pointer}
+.pcell.done{background:var(--pair-green); border-color:var(--pair-green); color:#fff}
+.railtoggle{display:none}
+.errbanner{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;display:flex;gap:10px;
+  align-items:center;flex-wrap:wrap;background:var(--panel);color:var(--ink);
+  border:1px solid var(--pair-orange);border-left:4px solid var(--pair-orange);
+  border-radius:3px;padding:11px 14px;font-family:var(--sans);font-size:13.5px;
+  box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.errbanner span{flex:1 1 260px}
+.errbanner button{font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;
+  border-radius:3px;padding:6px 11px;border:1px solid var(--pair-orange);
+  background:var(--pair-orange);color:#fff}
+.errbanner button#errClose{background:transparent;color:var(--ink-2);border-color:var(--line)}
+
+@media (max-width:900px){
+  body{font-size:16px}
+  .shell{display:block}
+  .rail{
+    position:fixed; top:0; left:0; height:100vh; width:280px; flex:none;
+    z-index:60; transform:translateX(-101%); transition:transform .18s ease;
+    box-shadow:0 0 40px rgba(0,0,0,.28); padding-top:56px;
+  }
+  .rail.open{transform:translateX(0)}
+  .main{padding:20px 18px 80px; max-width:none}
+  .railtoggle{display:inline-block}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:55;display:none}
+  .scrim.on{display:block}
+  .prompt .big{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+:focus-visible{outline:2px solid var(--pair-blue); outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header class="rack">
+  <button class="iconbtn railtoggle" id="railBtn" aria-label="Open section list">Sections</button>
+  <div class="brand">Network+ N10-009<span>Interactive study guide</span></div>
+  <nav class="modes" role="tablist" aria-label="Study modes">
+    <button class="mode" role="tab" data-view="read" aria-selected="true">Read</button>
+    <button class="mode" role="tab" data-view="ports" aria-selected="false">Ports</button>
+    <button class="mode" role="tab" data-view="subnet" aria-selected="false">Subnetting</button>
+    <button class="mode" role="tab" data-view="cards" aria-selected="false">Cards</button>
+    <button class="mode" role="tab" data-view="quiz" aria-selected="false">Quiz</button>
+    <button class="mode" role="tab" data-view="progress" aria-selected="false">Progress</button>
+  </nav>
+  <button class="iconbtn" id="themeBtn" aria-label="Switch light or dark">Theme</button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+  <aside class="rail" id="rail">
+    <div class="searchbox"><input type="search" id="search" placeholder="Search the guide" aria-label="Search sections"></div>
+    <div id="railList"></div>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+/* If anything throws, tell the user and offer to clear stored data, rather
+   than failing silently into a broken page. */
+window.addEventListener('error',function(ev){
+  if(document.getElementById('errBanner')) return;
+  var b=document.createElement('div');
+  b.id='errBanner'; b.className='errbanner';
+  b.innerHTML='<span>Something went wrong on this page. If it keeps happening, clearing saved progress usually fixes it.</span>'+
+              '<button id="errReset">Clear saved data</button><button id="errClose">Dismiss</button>';
+  (document.body||document.documentElement).appendChild(b);
+  document.getElementById('errReset').onclick=function(){
+    try{localStorage.removeItem('netplus009');localStorage.removeItem('netplus009_theme');}catch(e){}
+    location.reload();
+  };
+  document.getElementById('errClose').onclick=function(){b.remove();};
+  console.error('Study guide error:', ev.error||ev.message);
+});
+const DATA = __DATA__;
+const QUIZ = __QUIZ__;
+const PORTS = __PORTS__;
+
+/* ---------- storage ---------- */
+const KEY='netplus009';
+const FRESH=()=>({studied:{},notes:{},cards:{},ports:{best:0,runs:0},
+  subnet:{right:0,total:0,streak:0,bestStreak:0},quiz:{}});
+let S=FRESH();
+
+/* Stored state is untrusted: it may be from an older build, partially
+   written, or hand-edited. Validate every field by shape and fall back to the
+   default, rather than Object.assign-ing whatever happens to be there. */
+function loadState(){
+  let raw=null;
+  try{ raw=localStorage.getItem(KEY); }catch(e){ return; }
+  if(!raw) return;
+  let p;
+  try{ p=JSON.parse(raw); }catch(e){ return; }
+  if(!p || typeof p!=='object' || Array.isArray(p)) return;
+  const obj=v=>(v && typeof v==='object' && !Array.isArray(v))?v:null;
+  const num=v=>(typeof v==='number' && isFinite(v))?v:0;
+  const d=FRESH();
+  S={
+    studied: obj(p.studied)||d.studied,
+    notes:   obj(p.notes)  ||d.notes,
+    cards:   obj(p.cards)  ||d.cards,
+    quiz:    obj(p.quiz)   ||d.quiz,
+    ports:   Object.assign({}, d.ports,  obj(p.ports)  ?{best:num(p.ports.best),runs:num(p.ports.runs)}:{}),
+    subnet:  Object.assign({}, d.subnet, obj(p.subnet) ?{right:num(p.subnet.right),total:num(p.subnet.total),
+                                                         streak:num(p.subnet.streak),bestStreak:num(p.subnet.bestStreak)}:{}),
+  };
+}
+loadState();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+const $=s=>document.querySelector(s);
+const main=$('#main');
+let view='read', cur=0;
+
+/* ---------- theme ---------- */
+$('#themeBtn').onclick=()=>{
+  const now=document.documentElement.getAttribute('data-theme');
+  const dark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const next = now ? (now==='dark'?'light':'dark') : (dark?'light':'dark');
+  document.documentElement.setAttribute('data-theme',next);
+  try{localStorage.setItem(KEY+'_theme',next);}catch(e){}
+};
+try{const t=localStorage.getItem(KEY+'_theme'); if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}
+
+/* ---------- rail ---------- */
+const railBtn=$('#railBtn'), rail=$('#rail'), scrim=$('#scrim');
+railBtn.onclick=()=>{rail.classList.toggle('open');scrim.classList.toggle('on');};
+scrim.onclick=()=>{rail.classList.remove('open');scrim.classList.remove('on');};
+
+function buildRail(filter=''){
+  const list=$('#railList'); list.innerHTML='';
+  const f=filter.trim().toLowerCase();
+  let parts={};
+  DATA.forEach((s,i)=>{ (parts[s.part]=parts[s.part]||[]).push([s,i]); });
+  Object.keys(parts).forEach(p=>{
+    const items=parts[p].filter(([s])=> !f || s.title.toLowerCase().includes(f) || s.text.toLowerCase().includes(f));
+    if(!items.length) return;
+    const g=document.createElement('div'); g.className='panelgroup';
+    const h=document.createElement('h4'); h.textContent=p; g.appendChild(h);
+    items.forEach(([s,i])=>{
+      const b=document.createElement('button');
+      b.className='port'+(S.studied[s.id]?' done':'');
+      if(i===cur && view==='read') b.setAttribute('aria-current','true');
+      b.innerHTML='<span class="led"></span><span class="pnum">'+s.num+'</span><span>'+s.short+'</span>'+((S.notes&&S.notes[s.id])?'<span class="hasnote" title="has notes"></span>':'');
+      b.onclick=()=>{cur=i; setView('read'); rail.classList.remove('open'); scrim.classList.remove('on'); window.scrollTo(0,0);};
+      g.appendChild(b);
+    });
+    list.appendChild(g);
+  });
+  if(!list.children.length) list.innerHTML='<div class="panelgroup"><p style="font-family:var(--sans);font-size:13px;color:var(--ink-3)">No section matches that. Try a shorter word.</p></div>';
+}
+$('#search').oninput=e=>buildRail(e.target.value);
+
+/* ---------- views ---------- */
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+function setView(v){
+  view=v;
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===v)));
+  ({read:renderRead,ports:renderPorts,subnet:renderSubnet,cards:renderCards,quiz:renderQuiz,progress:renderProgress})[v]();
+  buildRail($('#search').value);
+  window.scrollTo(0,0);
+}
+
+/* ---------- READ ---------- */
+function renderRead(){
+  const s=DATA[cur];
+  const done=!!S.studied[s.id];
+  const note=(S.notes&&S.notes[s.id])||'';
+  main.innerHTML=
+    '<div class="sectionhead"><div class="eyebrow">'+esc(s.part)+'</div><h2>'+esc(s.title)+'</h2></div>'+
+    '<div class="doc">'+s.html+'</div>'+
+    '<div class="notes">'+
+      '<div class="noteshead"><span>My notes</span><span class="notestate" id="noteState">'+(note?'saved':'')+'</span></div>'+
+      '<textarea id="noteBox" placeholder="Your own notes for this section — what clicked, what you keep forgetting, page refs from your other materials.">'+esc(note)+'</textarea>'+
+    '</div>'+
+    '<div class="secfoot">'+
+      '<button class="btn '+(done?'good':'')+'" id="markBtn">'+(done?'Studied':'Mark as studied')+'</button>'+
+      (cur>0?'<button class="btn ghost" id="prevBtn">Previous</button>':'')+
+      (cur<DATA.length-1?'<button class="btn ghost" id="nextBtn">Next section</button>':'')+
+    '</div>';
+  const box=$('#noteBox');
+  let t=null;
+  box.addEventListener('input',()=>{
+    $('#noteState').textContent='saving…';
+    clearTimeout(t);
+    t=setTimeout(()=>{
+      S.notes=S.notes||{};
+      if(box.value.trim()) S.notes[s.id]=box.value; else delete S.notes[s.id];
+      save(); $('#noteState').textContent='saved';
+      buildRail($('#search').value);
+    },500);
+  });
+  $('#markBtn').onclick=()=>{S.studied[s.id]=!S.studied[s.id];save();renderRead();buildRail($('#search').value);};
+  if($('#prevBtn'))$('#prevBtn').onclick=()=>{cur--;renderRead();buildRail($('#search').value);window.scrollTo(0,0);};
+  if($('#nextBtn'))$('#nextBtn').onclick=()=>{cur++;renderRead();buildRail($('#search').value);window.scrollTo(0,0);};
+}
+
+/* ---------- PORTS ---------- */
+let pq=null,pScore=0,pAsked=0;
+function renderPorts(){
+  main.innerHTML='<div class="drill"><h2>Port drill</h2>'+
+   '<p class="lede">Both directions, the way the exam comes at you. Type the number when given a protocol; pick the protocol when given a number.</p>'+
+   '<div class="scorebar"><div>This run<b id="pRun">0 / 0</b></div><div>Best run<b id="pBest">'+S.ports.best+'</b></div><div>Runs<b>'+S.ports.runs+'</b></div></div>'+
+   '<div id="pCard"></div></div>';
+  pScore=0;pAsked=0;nextPort();
+}
+function nextPort(){
+  const dir=Math.random()<0.5?'toPort':'toProto';
+  const item=PORTS[Math.floor(Math.random()*PORTS.length)];
+  pq={dir,item};
+  const c=$('#pCard');
+  if(dir==='toPort'){
+    c.innerHTML='<div class="card"><div class="prompt">Which port does this use?<span class="big">'+esc(item.n)+'</span></div>'+
+      '<div class="row"><input class="numin" id="pIn" inputmode="numeric" autocomplete="off" placeholder="port"><button class="btn" id="pGo">Check</button></div>'+
+      '<div id="pOut"></div></div>';
+    const go=()=>gradePort($('#pIn').value.trim());
+    $('#pGo').onclick=go;
+    $('#pIn').addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+    $('#pIn').focus();
+  }else{
+    const opts=shuffle([item].concat(shuffle(PORTS.filter(p=>p.p!==item.p)).slice(0,3)));
+    c.innerHTML='<div class="card"><div class="prompt">What runs on this port?<span class="big">'+esc(String(item.p).split('/')[0])+'</span></div>'+
+      '<div class="answers" id="pAns"></div><div id="pOut"></div></div>';
+    opts.forEach(o=>{
+      const b=document.createElement('button'); b.className='ans'; b.textContent=o.n;
+      b.onclick=()=>{
+        document.querySelectorAll('#pAns .ans').forEach(x=>{x.disabled=true;
+          if(x.textContent===item.n)x.classList.add('correct');});
+        if(o.n!==item.n)b.classList.add('wrong');
+        finishPort(o.n===item.n);
+      };
+      $('#pAns').appendChild(b);
+    });
+  }
+}
+function gradePort(val){
+  const accepted=String(pq.item.p).split('/');
+  const ok=accepted.includes(val);
+  $('#pIn').disabled=true;$('#pGo').disabled=true;
+  $('#pIn').classList.add(ok?'ok':'no');
+  finishPort(ok);
+}
+function finishPort(ok){
+  pAsked++; if(ok)pScore++;
+  S.ports.runs++;
+  if(pScore>S.ports.best){S.ports.best=pScore;}
+  save();
+  $('#pRun').textContent=pScore+' / '+pAsked;
+  $('#pBest').textContent=S.ports.best;
+  const o=$('#pOut');
+  o.innerHTML='<p class="verdict '+(ok?'ok':'no')+'">'+(ok?'Correct.':'Not this time.')+'</p>'+
+    '<p class="explain"><strong>'+esc(pq.item.n)+'</strong> — port <strong>'+esc(String(pq.item.p))+'</strong> ('+esc(pq.item.t)+')'+(pq.item.note?'. '+esc(pq.item.note):'')+'</p>'+
+    '<div class="row" style="margin-top:14px"><button class="btn" id="pNext">Next</button><button class="btn ghost" id="pEnd">End run</button></div>';
+  $('#pNext').onclick=nextPort;
+  $('#pEnd').onclick=renderPorts;
+}
+
+/* ---------- SUBNET ---------- */
+let sq=null;
+function renderSubnet(){
+  main.innerHTML='<div class="drill"><h2>Subnet trainer</h2>'+
+   '<p class="lede">Randomly generated, endlessly. Work it with the magic number method — the worked solution appears after you check.</p>'+
+   '<div class="scorebar"><div>Correct<b id="sR">'+S.subnet.right+' / '+S.subnet.total+'</b></div><div>Streak<b id="sS">'+S.subnet.streak+'</b></div><div>Best streak<b id="sB">'+S.subnet.bestStreak+'</b></div></div>'+
+   '<div id="sCard"></div></div>';
+  newSubnet();
+}
+function newSubnet(){
+  let o=[],lo;
+  const type=Math.floor(Math.random()*3);
+  if(type===0){o=[10,rnd(256),rnd(256),rnd(256)]; lo=8;}
+  else if(type===1){o=[172,16+rnd(16),rnd(256),rnd(256)]; lo=12;}
+  else {o=[192,168,rnd(256),rnd(256)]; lo=16;}
+  const cidr=lo+Math.floor(Math.random()*(31-lo));
+  const ip=o.join('.');
+  sq={ip,cidr,...calcSubnet(ip,cidr)};
+  $('#sCard').innerHTML='<div class="card">'+
+    '<div class="prompt">Subnet this address<span class="big">'+ip+' /'+cidr+'</span></div>'+
+    '<div class="subnetgrid">'+
+      f('net','Network address')+f('bc','Broadcast address')+f('first','First usable')+f('last','Last usable')+f('hosts','Usable hosts')+f('mask','Subnet mask')+
+    '</div>'+
+    '<div class="row" style="margin-top:14px"><button class="btn" id="sGo">Check answers</button><button class="btn ghost" id="sSkip">Skip</button></div>'+
+    '<div id="sOut"></div></div>';
+  $('#sGo').onclick=gradeSubnet;
+  $('#sSkip').onclick=newSubnet;
+  $('#f_net').focus();
+  function f(id,label){return '<div class="field"><label for="f_'+id+'">'+label+'</label><input id="f_'+id+'" autocomplete="off" spellcheck="false"></div>';}
+}
+function rnd(n){return Math.floor(Math.random()*n);}
+function calcSubnet(ip,cidr){
+  const a=ip.split('.').map(Number);
+  const ipn=((a[0]<<24)>>>0)+(a[1]<<16)+(a[2]<<8)+a[3];
+  const maskn=cidr===0?0:(0xFFFFFFFF<<(32-cidr))>>>0;
+  const net=(ipn & maskn)>>>0;
+  const bc=(net | (~maskn>>>0))>>>0;
+  const hostBits=32-cidr;
+  const hosts=hostBits<=1?(hostBits===1?0:1):Math.pow(2,hostBits)-2;
+  return {net:d(net),bc:d(bc),first:hosts>0?d(net+1):'—',last:hosts>0?d(bc-1):'—',hosts:String(hosts),mask:d(maskn),maskn,net_n:net};
+}
+function d(n){return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');}
+function gradeSubnet(){
+  const keys=['net','bc','first','last','hosts','mask'];
+  let allOk=true;
+  keys.forEach(k=>{
+    const el=$('#f_'+k); const v=el.value.trim();
+    const ok=v.replace(/\s/g,'')===String(sq[k]);
+    el.classList.add(ok?'ok':'no'); el.disabled=true;
+    if(!ok)allOk=false;
+  });
+  S.subnet.total++;
+  if(allOk){S.subnet.right++;S.subnet.streak++;if(S.subnet.streak>S.subnet.bestStreak)S.subnet.bestStreak=S.subnet.streak;}
+  else S.subnet.streak=0;
+  save();
+  $('#sR').textContent=S.subnet.right+' / '+S.subnet.total;
+  $('#sS').textContent=S.subnet.streak; $('#sB').textContent=S.subnet.bestStreak;
+  $('#sGo').disabled=true;
+  const onBoundary = sq.cidr%8===0;
+  const oct = onBoundary ? sq.cidr/8 - 1 : Math.floor(sq.cidr/8);
+  const mv = sq.mask.split('.')[oct];
+  const magic = 256-Number(mv);
+  const head = onBoundary
+    ? 'Mask lands on an octet boundary.\nOctet #'+(oct+1)+' is the last full 255, so no magic number is needed —\nthe network is every address sharing the first '+(oct+1)+' octet(s).'
+    : 'Interesting octet  =  #'+(oct+1)+'  (value '+mv+')\n'+
+      'Magic number  =  256 − '+mv+'  =  '+magic+'\n'+
+      'Blocks step by '+magic+' in octet #'+(oct+1);
+  const work=
+    'Mask for /'+sq.cidr+'  =  '+sq.mask+'\n'+
+    head+'\n\n'+
+    'Network    '+sq.net+'\n'+
+    'Broadcast  '+sq.bc+'\n'+
+    'Usable     '+sq.first+'  →  '+sq.last+'\n'+
+    'Hosts      2^'+(32-sq.cidr)+' − 2  =  '+sq.hosts;
+  $('#sOut').innerHTML='<p class="verdict '+(allOk?'ok':'no')+'">'+(allOk?'All six correct.':'Check the highlighted fields.')+'</p>'+
+    '<div class="work">'+esc(work)+'</div>'+
+    '<div class="row" style="margin-top:14px"><button class="btn" id="sNext">Next address</button></div>';
+  $('#sNext').onclick=newSubnet;
+}
+
+/* ---------- CARDS ---------- */
+let deck=[],di=0,flipped=false,deckFilter='all';
+function renderCards(){
+  main.innerHTML='<div class="drill"><h2>Recall cards</h2>'+
+    '<p class="lede">Every memorize-this and exam-trap note from the guide, one at a time. Name the point before you flip.</p>'+
+    '<div class="selectrow">'+
+      '<select id="dFilter"><option value="all">All cards</option><option value="pin">Memorize only</option><option value="trap">Exam traps only</option><option value="unknown">Needs review only</option></select>'+
+      '<button class="btn ghost" id="dShuffle">Shuffle</button>'+
+    '</div>'+
+    '<div class="scorebar"><div>Card<b id="dPos">—</b></div><div>Marked known<b id="dKnown">0</b></div></div>'+
+    '<div id="dCard"></div></div>';
+  $('#dFilter').value=deckFilter;
+  $('#dFilter').onchange=e=>{deckFilter=e.target.value;buildDeck();};
+  $('#dShuffle').onclick=()=>{deck=shuffle(deck);di=0;flipped=false;showCard();};
+  buildDeck();
+}
+function buildDeck(){
+  let all=[];
+  DATA.forEach(s=>s.callouts.forEach((c,j)=>all.push({...c,sec:s.title,num:s.num,id:s.id+'#'+j})));
+  if(deckFilter==='pin')all=all.filter(c=>c.kind==='pin');
+  else if(deckFilter==='trap')all=all.filter(c=>c.kind==='trap');
+  else if(deckFilter==='unknown')all=all.filter(c=>(S.cards||{})[c.id]!=='known');
+  deck=shuffle(all); di=0; flipped=false; showCard();
+}
+function showCard(){
+  const el=$('#dCard');
+  $('#dKnown').textContent=Object.values(S.cards||{}).filter(v=>v==='known').length;
+  if(!deck.length){el.innerHTML='<div class="card"><p style="margin:0">Nothing in this deck. Every card here is marked known — switch the filter to review them again.</p></div>';$('#dPos').textContent='0';return;}
+  const c=deck[di%deck.length];
+  $('#dPos').textContent=((di%deck.length)+1)+' / '+deck.length;
+  const kindLabel=c.kind==='pin'?'Memorize':'Exam trap';
+  el.innerHTML='<div class="card flip">'+
+    '<div class="cardmeta '+c.kind+'">'+kindLabel+' — '+esc(c.num+' '+c.sec)+'</div>'+
+    (flipped?'<div class="cardbody">'+c.html+'</div>'
+            :'<p style="color:var(--ink-3);font-family:var(--sans);font-size:15px;margin:0">Recall the point, then reveal.</p>')+
+    '</div>'+
+    '<div class="row">'+
+      (flipped
+        ? '<button class="btn good" id="dKnow">I knew it</button><button class="btn ghost" id="dAgain">Review again</button>'
+        : '<button class="btn" id="dFlip">Reveal</button>')+
+      '<span class="pill">'+(S.cards[c.id]==='known'?'known':'unseen')+'</span>'+
+    '</div>';
+  if(flipped){
+    $('#dKnow').onclick=()=>{S.cards[c.id]='known';save();di++;flipped=false;showCard();};
+    $('#dAgain').onclick=()=>{S.cards[c.id]='review';save();di++;flipped=false;showCard();};
+  } else $('#dFlip').onclick=()=>{flipped=true;showCard();};
+}
+
+/* ---------- QUIZ ---------- */
+let qSet=[],qi=0,qScore=0,qDomain='all',qAnswered=false;
+function renderQuiz(){
+  main.innerHTML='<div class="drill"><h2>Practice questions</h2>'+
+    '<p class="lede">Written to match how the exam phrases things. Every answer explains itself and points back to the section.</p>'+
+    '<div class="selectrow">'+
+      '<select id="qDom"><option value="all">All domains</option>'+
+        [1,2,3,4,5].map(n=>'<option value="'+n+'">Domain '+n+'.0</option>').join('')+
+      '</select><button class="btn" id="qStart">Start</button></div>'+
+    '<div id="qCard"></div></div>';
+  $('#qDom').value=qDomain;
+  $('#qStart').onclick=()=>{qDomain=$('#qDom').value;startQuiz();};
+  $('#qCard').innerHTML='<div class="card"><p style="margin:0;color:var(--ink-2)">'+
+    'Pick a domain and start. Best scores so far: '+
+    (Object.keys(S.quiz).length?Object.entries(S.quiz).map(([k,v])=>'<strong>'+esc(k)+'</strong> '+v.best+'/'+v.of).join(' · '):'none yet')+'.</p></div>';
+}
+function startQuiz(){
+  qSet=shuffle(QUIZ.filter(q=>qDomain==='all'||String(q.d)===qDomain));
+  qi=0;qScore=0;qAnswered=false;showQ();
+}
+function showQ(){
+  if(qi>=qSet.length){
+    const k='Domain '+(qDomain==='all'?'mixed':qDomain);
+    const rec=S.quiz[k]||{best:0,of:qSet.length};
+    if(qScore>rec.best)S.quiz[k]={best:qScore,of:qSet.length};
+    save();
+    const pct=Math.round(qScore/qSet.length*100);
+    $('#qCard').innerHTML='<div class="card"><div class="prompt">'+qScore+' of '+qSet.length+' — '+pct+'%</div>'+
+      '<p class="explain">'+(pct>=80?'That is passing territory. Push into the sections you missed.':pct>=60?'Close. The gap is usually two or three specific facts, not the whole domain.':'Worth rereading the sections behind the ones you missed before drilling again.')+'</p>'+
+      '<div class="row" style="margin-top:14px"><button class="btn" id="qAgain">Run it again</button></div></div>';
+    $('#qAgain').onclick=startQuiz; return;
+  }
+  const q=qSet[qi];qAnswered=false;
+  $('#qCard').innerHTML='<div class="card">'+
+    '<div class="cardmeta pin" style="color:var(--ink-3)">Question '+(qi+1)+' of '+qSet.length+' — section '+esc(q.s)+'</div>'+
+    '<div class="prompt" style="font-size:19px">'+esc(q.q)+'</div>'+
+    '<div class="answers" id="qAns"></div><div id="qOut"></div></div>';
+  const order=shuffle(q.a.map((t,i)=>({t,i})));
+  order.forEach(o=>{
+    const b=document.createElement('button');b.className='ans';b.textContent=o.t;
+    b.onclick=()=>{
+      if(qAnswered)return; qAnswered=true;
+      document.querySelectorAll('#qAns .ans').forEach((x,ix)=>{x.disabled=true;
+        if(x.textContent===q.a[q.c])x.classList.add('correct');});
+      if(o.i!==q.c)b.classList.add('wrong'); else qScore++;
+      $('#qOut').innerHTML='<p class="verdict '+(o.i===q.c?'ok':'no')+'">'+(o.i===q.c?'Correct.':'The answer is '+esc(q.a[q.c])+'.')+'</p>'+
+        '<p class="explain">'+esc(q.e)+'</p>'+
+        '<div class="row" style="margin-top:14px"><button class="btn" id="qNext">'+(qi===qSet.length-1?'See score':'Next question')+'</button></div>';
+      $('#qNext').onclick=()=>{qi++;showQ();};
+    };
+    $('#qAns').appendChild(b);
+  });
+}
+
+/* ---------- PROGRESS ---------- */
+function renderProgress(){
+  const done=DATA.filter(s=>S.studied[s.id]).length;
+  const known=Object.values(S.cards||{}).filter(v=>v==='known').length;
+  let totalCards=0; DATA.forEach(s=>totalCards+=s.callouts.length);
+  main.innerHTML='<div class="drill"><h2>Progress</h2>'+
+    '<p class="lede">Kept in this browser only. Each square is a section — click one to jump to it.</p>'+
+    '<div class="scorebar">'+
+      '<div>Sections studied<b>'+done+' / '+DATA.length+'</b></div>'+
+      '<div>Cards known<b>'+known+' / '+totalCards+'</b></div>'+
+      '<div>Subnet accuracy<b>'+(S.subnet.total?Math.round(S.subnet.right/S.subnet.total*100)+'%':'—')+'</b></div>'+
+      '<div>Best port run<b>'+S.ports.best+'</b></div>'+
+      '<div>Sections with notes<b>'+Object.keys(S.notes||{}).length+'</b></div>'+
+    '</div>'+
+    '<div class="progressgrid" id="pg"></div>'+
+    '<p class="explain" style="margin-top:18px">Readiness is not the number of squares filled. It is whether you can subnet cold, name the ports both directions, and state the next troubleshooting step from any scenario.</p>'+
+    '<div class="row" style="margin-top:22px"><button class="btn" id="exportBtn">Export my notes</button><button class="btn ghost" id="resetBtn">Reset all progress</button></div></div>';
+  const pg=$('#pg');
+  DATA.forEach((s,i)=>{
+    const c=document.createElement('button');
+    c.className='pcell'+(S.studied[s.id]?' done':'');
+    c.textContent=s.num.replace(/[A-Z]/g,x=>x); c.title=s.title;
+    c.onclick=()=>{cur=i;setView('read');};
+    pg.appendChild(c);
+  });
+  $('#exportBtn').onclick=()=>{
+    const n=S.notes||{};
+    if(!Object.keys(n).length){alert('No notes yet.');return;}
+    let out='# My Network+ notes\n\n';
+    DATA.forEach(x=>{ if(n[x.id]) out+='## '+x.num+' '+x.title+'\n\n'+n[x.id]+'\n\n'; });
+    const b=new Blob([out],{type:'text/markdown'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(b); a.download='my-netplus-notes.md';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  };
+  $('#resetBtn').onclick=()=>{
+    if(!confirm('Clear studied sections, card marks and drill scores? This cannot be undone.'))return;
+    S=FRESH();
+    save();renderProgress();buildRail($('#search').value);
+  };
+}
+
+/* ---------- util ---------- */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+buildRail();
+setView('read');
+</script>
+</body>
+</html>
