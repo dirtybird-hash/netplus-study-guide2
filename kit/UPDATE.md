@@ -103,7 +103,7 @@ Rewrite the affected section as **one coherent narrative** — not an original b
 Preserve while merging:
 
 - `📌` memorize markers and `⚠️` exam-trap markers — these generate the recall cards
-- `🔧 LAB` stubs at the end of each section — these are the TORA hooks
+- `🔧 LAB` stubs at the end of each section — these mark the labs to expand
 - `🔗` A+ crossover markers
 - Cross-references to other sections, e.g. *(see 2.1)* — update them if content moves
 - Table-heavy formatting. The app renders tables well and they drill better than prose
@@ -113,7 +113,7 @@ Preserve while merging:
 - Sections start with `## ` and objective sections must begin with the number: `## 4.2 Network Segmentation`
 - Parts start with `# PART n — Name (Domain n.0, xx%)`
 - Callouts must be their **own paragraph** starting with the emoji, or they will not become recall cards
-- Lab stubs must be `### 🔧 LAB n.n — Title *(call TORA)*` followed by one paragraph
+- Lab stubs must be `### 🔧 LAB n.n — Title` followed by one paragraph
 
 ### 5. Log it
 

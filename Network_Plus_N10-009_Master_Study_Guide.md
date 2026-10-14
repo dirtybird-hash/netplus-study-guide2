@@ -1,7 +1,7 @@
 # CompTIA Network+ (N10-009) — Master Study Guide
 
 **Built from 23 course transcripts (Days 1–18), reorganized by exam domain.**
-**Lab-ready for Cisco Packet Tracer 9.0.1.** Lab stubs are marked 🔧 — call **TORA** to have any of them expanded into a full build with step-by-step instructions, exact configs, and break/fix challenges.
+**Lab-ready for Cisco Packet Tracer 9.0.1.** Lab stubs are marked 🔧 — each one expands into a full build with step-by-step instructions, exact configs, and break/fix challenges.
 
 ---
 
@@ -13,14 +13,14 @@ Reading order that works:
 
 1. **First pass** — read a domain end to end, ignore the 🔧 stubs. Build the map.
 2. **Second pass** — work the *Exam traps* boxes. These are where the test writers live.
-3. **Third pass** — call **TORA** on the labs for that domain. Build it, break it, fix it.
+3. **Third pass** — build the labs for that domain. Build it, break it, fix it.
 4. **Drill** — Appendix A (ports), Appendix B (subnetting), Appendix C (commands) are pure memorization. Do these daily, not in a block.
 
 **Notation used throughout:**
 
 | Mark | Meaning |
 |---|---|
-| 🔧 | Packet Tracer lab stub — call TORA to expand |
+| 🔧 | Packet Tracer lab stub — expand it into a full build |
 | ⚠️ | Exam trap — commonly missed or deliberately confused |
 | 📌 | Memorize verbatim — likely a direct recall question |
 | 🔗 | A+ crossover — you already know this, connect it forward |
@@ -197,7 +197,7 @@ Two reasons the exam cares:
 
 🔗 **A+ crossover:** you already troubleshoot this way — check the cable before you reinstall the OS. OSI just gives the instinct a formal structure.
 
-### 🔧 LAB 1.1 — OSI Layer Isolation Walkthrough *(call TORA)*
+### 🔧 LAB 1.1 — OSI Layer Isolation Walkthrough
 Build a two-switch, one-router topology and deliberately induce a failure at Layers 1, 2, 3, and 7 in sequence. Use Packet Tracer's Simulation Mode with PDU inspection to watch encapsulation happen frame by frame, then diagnose each break by layer.
 
 ---
@@ -422,7 +422,7 @@ A mechanism built into IP to manage packet lifespan. A misdirected packet could 
 
 ⚠️ **Correction to the source material.** The transcript states the default TTL is 16 hops. That figure is **RIP's maximum hop count (16 = unreachable/infinity)**, not the IP TTL default. Real IP TTL defaults are typically **64 (Linux/macOS), 128 (Windows), or 255 (many network devices)**. Know the real numbers — the 64/128 distinction is genuinely useful, because a `ping` reply's TTL value hints at the responding OS and how many hops away it is.
 
-### 🔧 LAB 1.2 — Appliance Placement and Traffic Control *(call TORA)*
+### 🔧 LAB 1.2 — Appliance Placement and Traffic Control
 Build an enterprise topology with a DMZ (dual firewall), an internal Layer 3 switch doing inter-VLAN routing, a server farm, and wireless APs. Verify MAC learning and flooding behavior in Simulation Mode, prove the stateful firewall's inbound/outbound asymmetry, and demonstrate ARP resolution frame by frame. Break/fix: rogue AP introduction, evil twin, and a misconfigured DMZ rule that exposes the internal network.
 
 ---
@@ -545,7 +545,7 @@ Multiple customers **share cloud resources** — the same physical compute may r
 
 ⚠️ Multitenancy is where compliance questions concentrate. If the data is regulated — the transcript's example is credit card information under PCI — shared infrastructure raises questions that a private cloud avoids entirely. That is often the real reason an organization chooses private or hybrid over public.
 
-### 🔧 LAB 1.3 — Hybrid Cloud Connectivity Model *(call TORA)*
+### 🔧 LAB 1.3 — Hybrid Cloud Connectivity Model
 Packet Tracer can't run real cloud services, but it models the connectivity well. Build an on-premises network with a cloud-connected branch: configure a site-to-site VPN to a simulated cloud VPC, apply ACLs that emulate network security groups vs subnet security lists, and demonstrate the backhaul problem from section 1.8 by measuring path latency with and without direct cloud access.
 
 ---
@@ -689,7 +689,7 @@ Not a transport protocol and **has no ports** — it operates at Layer 3.
 
 📌 **Traceroute is TTL manipulation.** Send a packet with TTL=1; the first router decrements to 0 and returns **Time Exceeded**, revealing hop 1. Then TTL=2 for hop 2, and so on. Understanding this explains why traceroute output can show gaps — some devices are configured not to reply.
 
-### 🔧 LAB 1.4 — Protocol Capture and Port Behavior *(call TORA)*
+### 🔧 LAB 1.4 — Protocol Capture and Port Behavior
 Configure DNS, DHCP, HTTP/HTTPS, FTP, and email servers in Packet Tracer, then use Simulation Mode with protocol filters to capture the DORA exchange, a DNS query, a TCP three-way handshake, and an ICMP traceroute. Break/fix: wrong DHCP scope, missing IP helper address across a router, DNS pointing at a dead server, and a firewall ACL blocking 443 but not 80.
 
 ---
@@ -952,7 +952,7 @@ Fibre Channel range extends to **5–10 km**, which supports **remote disaster r
 1. A UPS is generally **not** meant to run equipment for hours. It provides enough runtime for a **graceful shutdown** rather than an instant power loss.
 2. A UPS is a **battery**, and batteries — especially banks of them — are a **significant source of EMI**. Route data cabling away from them.
 
-### 🔧 LAB 1.5 — Media Selection and Cable Fault Isolation *(call TORA)*
+### 🔧 LAB 1.5 — Media Selection and Cable Fault Isolation
 Build a multi-building campus in Packet Tracer requiring correct media choices at each segment (copper access, MMF between floors, SMF between buildings). Deliberately mis-select cable types — straight-through where crossover is needed, MMF where the distance demands SMF — and diagnose each failure from link-state and interface counters.
 
 ---
@@ -1047,7 +1047,7 @@ This is a favorite exam topic because it explains *why* an architecture changed,
 
 ⚠️ Placement matters. Where you put a resource determines whether its traffic is east-west (switched, fast) or north-south (routed, slower). Expect scenario questions on this.
 
-### 🔧 LAB 1.6 — Build All Four Topologies *(call TORA)*
+### 🔧 LAB 1.6 — Build All Four Topologies
 Construct star, partial mesh, full mesh, and a hybrid three-tier campus in one Packet Tracer file. Measure convergence and path behavior after cutting links in each. Then build a spine-leaf fabric and demonstrate STP blocking a link in the Layer 2 design while the Layer 3 design uses both.
 
 ---
@@ -1328,7 +1328,7 @@ An IP address **not bound to a single physical node**. Multiple devices can pres
 | IPsec | Optional | Designed in |
 | NAT | Essential | Largely unnecessary |
 
-### 🔧 LAB 1.7 — Subnetting Under Fire *(call TORA)*
+### 🔧 LAB 1.7 — Subnetting Under Fire
 Packet Tracer build requiring you to design a VLSM scheme for a five-department network from a single /24, configure router subinterfaces for inter-VLAN routing, apply PAT for internet access, and add IPv6 dual-stack alongside. Break/fix: overlapping subnets, an off-by-one gateway address, a host that lands on a network address, a DHCP scope that doesn't match the subnet, and an APIPA outbreak.
 
 ---
@@ -1484,7 +1484,7 @@ Creating and managing infrastructure — VMs, networking, storage, databases —
 
 📌 **A conceptual note the transcript makes well:** NAT was never designed as a security device. It became one incidentally, because inbound connections through a NAT device aren't permitted by default. That's a side effect, not a security architecture — and it's part of why IPv6, which doesn't need NAT, requires you to think about firewalling deliberately rather than relying on an accident.
 
-### 🔧 LAB 1.8 — Modern Environment Concepts in Packet Tracer *(call TORA)*
+### 🔧 LAB 1.8 — Modern Environment Concepts in Packet Tracer
 Packet Tracer has limited SDN/SASE support, so this lab pairs a buildable component with a design exercise: build a multi-site WAN with a head-office backhaul path, measure the latency penalty, then re-architect for direct cloud access and document the security controls that must move with it. Includes an IPv6 dual-stack build with SLAAC and link-local verification.
 
 ---
@@ -1620,7 +1620,7 @@ When multiple paths to the same destination exist, a router decides in this orde
 
 📌 LAG solves part of the problem STP creates — it presents multiple physical links to STP as a **single logical link**, so STP doesn't block the redundant members.
 
-### 🔧 LAB 2.1 — Routing and Redundancy *(call TORA)*
+### 🔧 LAB 2.1 — Routing and Redundancy
 Multi-router topology running static routes, RIPv2, and OSPF simultaneously to demonstrate administrative distance in action. Configure router-on-a-stick inter-VLAN routing, then migrate it to a Layer 3 switch. Add HSRP/VRRP with a virtual gateway IP and prove failover by shutting the active router mid-ping. Break/fix: a stale static route overriding OSPF, a missing `network` statement, an OSPF area mismatch, and an FHRP priority misconfiguration that puts the wrong router in the active role.
 
 ---
@@ -1777,7 +1777,7 @@ Useful commands: `arp -a` to view the cache, `arp -d` to clear it.
 
 ⚠️ 📌 **MTU must match end to end.** A mismatch causes fragmentation, or — worse — silent black-holing when packets have the **Don't Fragment** bit set and an intermediate link can't carry them. The classic symptom is maddening: **small packets (ping) succeed while large transfers fail or hang.** If you see "ping works but the file share times out," test with `ping -f -l <size>` (Windows) to find the real path MTU.
 
-### 🔧 LAB 2.2 — Switching Deep Dive *(call TORA)*
+### 🔧 LAB 2.2 — Switching Deep Dive
 Multi-switch build with VLANs spanning switches, 802.1Q trunks, a voice VLAN with a PC behind an IP phone, port security in all three violation modes, and STP root bridge manipulation. Break/fix: native VLAN mismatch, a duplex mismatch producing late collisions, an err-disabled port, a deliberately induced broadcast storm with STP disabled, and an MTU mismatch that passes ping but fails file transfer.
 
 ---
@@ -1910,7 +1910,7 @@ Concepts that appear in both configuration and troubleshooting questions:
 - **Channel overlap / co-channel interference** — adjacent APs on the same or overlapping channels degrading each other.
 - **DFS (Dynamic Frequency Selection)** — required on certain 5 GHz channels to avoid interfering with radar; an AP must vacate the channel if radar is detected.
 
-### 🔧 LAB 2.3 — Wireless Deployment and Interference *(call TORA)*
+### 🔧 LAB 2.3 — Wireless Deployment and Interference
 Build a multi-AP wireless network in Packet Tracer with a WLC managing lightweight APs, separate corporate and guest SSIDs with VLAN separation, WPA2-Enterprise backed by a RADIUS server, and a 1/6/11 channel plan. Break/fix: two APs sharing a channel, a guest SSID with a route into the internal VLAN, a client stuck on 2.4 GHz dragging the network down, and an evil twin introduced alongside the legitimate SSID.
 
 ---
@@ -2029,7 +2029,7 @@ Everyday devices with network connectivity generating large volumes of data. Exa
 
 ⚠️ **The security framing that matters:** industrial control systems were designed for **isolated networks** and often run legacy protocols with no authentication or encryption. Connecting them to corporate networks or the internet — for the convenience of remote monitoring — is where the risk enters. **Air-gapping and segmentation** are the standard answers.
 
-### 🔧 LAB 2.4 — Physical Design and Specialized Segments *(call TORA)*
+### 🔧 LAB 2.4 — Physical Design and Specialized Segments
 Design a two-floor building layout honoring the 90/6/3 distance budget, placing MDF and IDF appropriately and justifying each. Build it in Packet Tracer with VoIP phones on a PoE switch with a voice VLAN, an isolated IoT segment, and a segmented SCADA/ICS network. Break/fix: a horizontal run exceeding 90 m producing intermittent errors, a PoE budget exceeded so an AP won't boot, an IoT device with a route into the corporate VLAN, and a VoIP call degraded by missing QoS marking.
 
 ---
@@ -2190,7 +2190,7 @@ Policies vary by organization, but the standard set:
 
 📌 The **shared responsibility model** is the concept to carry away: in cloud, the provider secures *the cloud*, and you secure *what you put in it*. Where that line falls depends on the service model — it moves as you go IaaS → PaaS → SaaS (see 1.3).
 
-### 🔧 LAB 3.1 — Documentation and Change Simulation *(call TORA)*
+### 🔧 LAB 3.1 — Documentation and Change Simulation
 Rather than a pure build, this is a documentation exercise on a Packet Tracer topology: produce physical and logical diagrams, an addressing plan, and a rack elevation for a network you've built. Then execute a change through a full change management workflow — including a deliberately failed change requiring rollback — and document the incident.
 
 ---
@@ -2334,7 +2334,7 @@ Network monitoring applications provide an overview of operations: device discov
 
 📌 **Agent-based vs agentless:** agent-based gives deeper visibility into the host but requires software deployment and maintenance on every device. Agentless (typically SNMP or WMI) deploys faster and touches nothing, but sees less. The trade-off is depth vs deployment cost.
 
-### 🔧 LAB 3.2 — Monitoring and Baseline Establishment *(call TORA)*
+### 🔧 LAB 3.2 — Monitoring and Baseline Establishment
 Configure SNMP with a monitoring server, set up syslog forwarding from all devices with correct severity levels, synchronize time with NTP so log correlation works, and capture a performance baseline under normal load. Then induce failures — a duplex mismatch, a saturated link, a flapping interface — and identify each one purely from the counters and logs, without looking at the configuration.
 
 ---
@@ -2481,7 +2481,7 @@ A significant component of any HA or DR plan, and easy to overlook because it is
 
 ⚠️ **An untested backup is not a backup.** Restore testing belongs in the DR testing cycle above. The failure mode organizations actually experience is discovering during an incident that the backups have been silently failing for months.
 
-### 🔧 LAB 3.3 — Redundancy and Failover *(call TORA)*
+### 🔧 LAB 3.3 — Redundancy and Failover
 Build a topology with dual routers running FHRP, redundant switch uplinks under STP, NIC-teamed servers connected to two different switches, and a load-balanced server pair. Prove each layer of redundancy by failing it while a continuous ping runs, and measure actual failover time against a stated RTO. Break/fix: FHRP configured but both routers claiming active, a NIC team homed to a single switch, and STP blocking the wrong link after a root bridge change.
 
 ---
@@ -2566,7 +2566,7 @@ Maps human-readable names to IP addresses. Runs on **port 53** (UDP for queries,
 - **PTP (Precision Time Protocol)** — sub-microsecond accuracy for environments where NTP isn't precise enough (financial trading, industrial control)
 - **NTS (Network Time Security)** — adds authentication and integrity to NTP, protecting against an attacker feeding you false time
 
-### 🔧 LAB 3.4 — Addressing and Name Services End to End *(call TORA)*
+### 🔧 LAB 3.4 — Addressing and Name Services End to End
 Build a routed multi-VLAN network with a central DHCP server serving every subnet via IP helper addresses, a DNS server carrying A, AAAA, CNAME, MX and PTR records, and NTP synchronisation across all devices. Break/fix: a missing IP helper causing APIPA on one VLAN only, a scope with no exclusions producing address conflicts, a stale DNS record, and clock skew breaking authentication.
 
 ---
@@ -2631,7 +2631,7 @@ A **jump server** (jump host, jump box) is an intermediary system that sits betw
 
 ⚠️ **The corresponding risk:** the jump server becomes a **high-value target and a single point of failure**. Compromise it and you've compromised the path to everything behind it. It must be among the most hardened, most monitored systems you own.
 
-### 🔧 LAB 3.5 — Remote Access and Management Paths *(call TORA)*
+### 🔧 LAB 3.5 — Remote Access and Management Paths
 Configure a site-to-site VPN between head office and a branch, then add client-to-site remote access. Compare split and full tunnel behaviour by tracing where internet-bound traffic actually goes. Harden device access to SSH only with Telnet disabled, place a jump server as the sole administrative path, and prove out-of-band recovery by shutting down a router's management interface and restoring it over console.
 
 ---
@@ -2807,7 +2807,7 @@ Being compliant means **adhering to standards created by industry and following 
 **URL filtering** — allow/deny by web address (see the proxy discussion in 1.2).
 **Content filtering** — inspect and filter by content category or type, including scanning for malware and for sensitive data leaving the organization.
 
-### 🔧 LAB 4.1 — Segmentation and Access Control *(call TORA)*
+### 🔧 LAB 4.1 — Segmentation and Access Control
 Build a flat network and segment it properly: separate VLANs for corporate, guest, IoT and management, with a Layer 3 device applying inter-VLAN ACLs. Add 802.1X with a RADIUS server so ports authenticate identities rather than MAC addresses. Break/fix: an ACL whose rule order silently permits traffic it was written to block, and a segment that reaches the management VLAN because of a missing implicit-deny assumption.
 
 ---
@@ -2962,7 +2962,7 @@ Manipulating **people** rather than technology. 📌 The exam treats this as its
 | Ransomware | **Offline, tested backups** |
 | DDoS | **Upstream scrubbing, rate limiting** |
 
-### 🔧 LAB 4.2 — Attack and Defence *(call TORA)*
+### 🔧 LAB 4.2 — Attack and Defence
 Packet Tracer supports several of these directly. Build a network and demonstrate MAC flooding filling the CAM table and triggering flooding, then stop it with port security. Introduce a rogue DHCP server and watch clients take bad addressing, then defeat it with DHCP snooping. Create a VLAN hopping scenario via an unused native VLAN, and stage an evil twin alongside a legitimate SSID. Each stage is build it, break it, then defend it.
 
 ---
@@ -3079,7 +3079,7 @@ Beyond WPA3/WPA2 and 802.1X (see 2.3):
 
 **Remote access authentication:** RADIUS, TACACS+, LDAP/Active Directory integration, SSO, and MFA.
 
-### 🔧 LAB 4.3 — Device Hardening *(call TORA)*
+### 🔧 LAB 4.3 — Device Hardening
 Take a deliberately insecure Packet Tracer network — default credentials, Telnet enabled, no port security, flat VLAN, open guest wireless — and harden it systematically: SSH-only management, port security with all three violation modes, 802.1X with RADIUS, segmented IoT and guest VLANs, ACLs demonstrating first-match-wins and implicit deny, and a DMZ. Break/fix: an ACL with rules in the wrong order silently permitting blocked traffic, a port security move violation, and an over-powered AP leaking signal beyond the building.
 
 ---
@@ -3256,7 +3256,7 @@ Once you've zeroed in on the problem, a solution must be implemented — but **s
 
 **Where to record it:** dedicated software, a database, or an internal site in robust environments; **at minimum a journal** in less formal ones. The method matters less than the thoroughness.
 
-### 🔧 LAB 5.1 — Methodology Drill *(call TORA)*
+### 🔧 LAB 5.1 — Methodology Drill
 A set of Packet Tracer scenarios, each with a single planted fault and no hints, worked strictly through all seven steps with written documentation for each. Includes at least one scenario where the first theory is wrong and must be discarded, and one requiring simulated escalation.
 
 ---
@@ -3307,7 +3307,7 @@ A set of Packet Tracer scenarios, each with a single planted fault and no hints,
 
 📌 **When several things fail at once, resist the urge to troubleshoot them individually.** Step 1 of the methodology tells you to determine **scope** first; a widespread simultaneous failure almost always has one shared cause.
 
-### 🔧 LAB 5.2 — Physical Layer Fault Isolation *(call TORA)*
+### 🔧 LAB 5.2 — Physical Layer Fault Isolation
 Plant a series of physical-layer faults in one topology: a damaged run producing CRC errors, a duplex mismatch generating late collisions, an administratively shut port, an err-disabled port from a port security violation, and a run exceeding the 90 m limit. Diagnose each from interface counters alone, without inspecting the configuration.
 
 ---
@@ -3376,7 +3376,7 @@ Plant a series of physical-layer faults in one topology: a damaged run producing
 
 **Verification:** port scan (5.2) to see what's actually listening, `netstat` on the host, and firewall/ACL review remembering **first match wins and implicit deny**.
 
-### 🔧 LAB 5.3 — Addressing and Path Faults *(call TORA)*
+### 🔧 LAB 5.3 — Addressing and Path Faults
 Break addressing and routing in sequence: a DHCP scope overlapping a static address, a missing IP helper causing APIPA on one VLAN, a stale static route overriding OSPF, a native VLAN mismatch leaking traffic between VLANs, and an ACL blocking a port the application needs. Work each one through the seven-step methodology with written documentation.
 
 ---
@@ -3463,7 +3463,7 @@ Performance complaints are the hardest troubleshooting calls because nothing is 
 
 **Tools:** **SSL Labs** for checking publicly accessible web servers; browser certificate inspection; `openssl s_client` for direct examination.
 
-### 🔧 LAB 5.4 — Performance and Wireless Degradation *(call TORA)*
+### 🔧 LAB 5.4 — Performance and Wireless Degradation
 Build a wireless network with overlapping channels and measure the throughput cost, then fix the channel plan and measure again. Saturate a link and observe the effect on a VoIP call with and without QoS marking. Break/fix: an AP at excessive transmit power causing clients to cling instead of roam, a legacy client dragging down a modern network, and a certificate name mismatch after a server rename.
 
 ---
@@ -3553,7 +3553,7 @@ Software on a laptop, phone, or tablet that surveys the RF environment.
 
 📌 **TDR reports distance to fault**, which is what makes it valuable — you don't replace the run, you go to the spot.
 
-### 🔧 LAB 5.5 — Tool Selection Drill *(call TORA)*
+### 🔧 LAB 5.5 — Tool Selection Drill
 A scenario set where the task is not to fix the fault but to **name the correct tool and justify it** — then use it in Packet Tracer where supported. Includes cases designed to distinguish tester vs certifier, ping vs traceroute, and sniffer vs port scanner.
 
 ---
@@ -3788,7 +3788,7 @@ ip domain-name <name> / crypto key generate rsa
 | Day | Focus |
 |---|---|
 | Mon | New domain content — read one section |
-| Tue | Lab that section (call **TORA**) |
+| Tue | Lab that section |
 | Wed | New content |
 | Thu | Lab + break/fix |
 | Fri | Review the week's ⚠️ and 📌 boxes only |
@@ -3847,7 +3847,7 @@ Three factual errors in the course material, flagged where they appear and colle
 
 ---
 
-*End of guide. Call **TORA** to expand any 🔧 lab stub into a full Packet Tracer 9.0.1 build. Call **GUM!GUM!** to brainstorm with multiple-choice options.*
+*End of guide. Each 🔧 marks a Packet Tracer 9.0.1 lab stub ready to be expanded into a full build.*
 ## Appendix F — Master Symptom Reference
 
 
