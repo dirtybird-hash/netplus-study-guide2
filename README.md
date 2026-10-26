@@ -31,6 +31,10 @@ Six modes, all generated from the markdown so nothing drifts out of sync:
 - **Quiz** — 108 questions across all five domains, each explaining its reasoning
 - **Progress** — section grid, card counts, drill accuracy, and notes export
 
+The mode bar also links out to the **OSI Rack Trainer** (objective 1.1, seat each module in the
+right layer), a separate app at https://dirtybird-hash.github.io/osi-rack-trainer/. It is a link
+in `kit/template.html`, not a generated view, and keeps its own saved progress.
+
 ### Notes on storage
 
 Progress and notes are kept in **browser localStorage**. That means they are:

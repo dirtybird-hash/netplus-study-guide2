@@ -64,6 +64,10 @@ a{color:var(--pair-blue)}
   padding:6px 11px; cursor:pointer; color:var(--ink-2);
 }
 .mode:hover{background:var(--line-2)}
+/* External trainers sit in the mode bar but are links, not views: no data-view,
+   so setView never sees them. Dashed border marks "opens another page". */
+a.mode.ext{text-decoration:none; border:1px dashed var(--line); display:inline-flex; align-items:center; gap:4px}
+a.mode.ext:hover{border-color:var(--pair-blue); color:var(--pair-blue)}
 .mode[aria-selected="true"]{background:var(--pair-blue); color:#fff; border-color:var(--pair-blue)}
 .iconbtn{background:transparent;border:1px solid var(--line);border-radius:var(--r);padding:6px 9px;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--ink-2)}
 .iconbtn:hover{background:var(--line-2)}
@@ -254,6 +258,8 @@ select{padding:7px 10px;border:1px solid var(--line);border-radius:var(--r);back
     <button class="mode" role="tab" data-view="quiz" aria-selected="false">Quiz</button>
     <button class="mode" role="tab" data-view="progress" aria-selected="false">Progress</button>
   </nav>
+  <a class="mode ext" href="https://dirtybird-hash.github.io/osi-rack-trainer/" target="_blank" rel="noopener"
+     title="OSI Rack Trainer: seat each module in the right layer (objective 1.1). Opens in a new tab.">OSI Rack <span aria-hidden="true">&#8599;</span></a>
   <button class="iconbtn" id="themeBtn" aria-label="Switch light or dark">Theme</button>
 </header>
 
@@ -363,10 +369,10 @@ function buildRail(filter=''){
 $('#search').oninput=e=>buildRail(e.target.value);
 
 /* ---------- views ---------- */
-document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+document.querySelectorAll('.mode[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));
 function setView(v){
   view=v;
-  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===v)));
+  document.querySelectorAll('.mode[data-view]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===v)));
   ({read:renderRead,ports:renderPorts,subnet:renderSubnet,cards:renderCards,quiz:renderQuiz,progress:renderProgress})[v]();
   buildRail($('#search').value);
   window.scrollTo(0,0);
